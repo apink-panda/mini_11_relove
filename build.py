@@ -6,6 +6,8 @@ from jinja2 import Environment, FileSystemLoader
 
 import json
 
+from datetime import datetime
+
 # Configuration
 SHEET_ID = '1YN3_ehOl7SPNXnxn5ob7j6GAcrRF00W-4seatqcSQEY'
 SHEETS = {
@@ -31,6 +33,12 @@ TRANSLATIONS = {
         '經典歌曲': {'TC': '經典歌曲', 'KR': '명곡', 'EN': 'Classic Songs', 'JP': '名曲'},
         '訪問': {'TC': '訪問', 'KR': '인터뷰/예능', 'EN': 'Interview', 'JP': 'インタビュー'},
         '應援': {'TC': '應援', 'KR': '응원법', 'EN': 'Fanchant', 'JP': '応援'}
+    },
+    'last_updated_label': {
+        'TC': '最後更新時間',
+        'KR': '마지막 업데이트',
+        'EN': 'Last Updated',
+        'JP': '最終更新'
     }
 }
 
@@ -72,10 +80,6 @@ def fetch_data(sheet_id, gid='0'):
         print(f"Error fetching data: {e}")
         return []
 
-def build_site():
-    env = Environment(loader=FileSystemLoader('templates'))
-    template = env.get_template('index.html')
-    
 def get_all_videos():
     """Fetches videos for all sheets."""
     all_videos = {}
@@ -91,11 +95,15 @@ def build_site():
     
     all_videos = get_all_videos()
     
+    # Get current time
+    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    
     html_output = template.render(
         sheets=all_videos,
         current_sheet='Love Me More',
         site_title=TRANSLATIONS['site_title']['TC'], # Default to TC
-        translations_json=json.dumps(TRANSLATIONS)
+        translations_json=json.dumps(TRANSLATIONS),
+        last_updated=current_time
     )
     
     with open('index.html', 'w', encoding='utf-8') as f:

@@ -64,6 +64,12 @@ window.changeLanguage = function (lang) {
         document.querySelector('h1[data-key]').textContent = translations[titleKey][lang];
     }
 
+    // Update Last Updated Label
+    const lastUpdatedKey = document.querySelector('span[data-key="last_updated_label"]').getAttribute('data-key');
+    if (translations[lastUpdatedKey] && translations[lastUpdatedKey][lang]) {
+        document.querySelector('span[data-key="last_updated_label"]').textContent = translations[lastUpdatedKey][lang];
+    }
+
     // Update Tab Buttons
     const buttons = document.querySelectorAll('.tab-button[data-key]');
     buttons.forEach(btn => {
