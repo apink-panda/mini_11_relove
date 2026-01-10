@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site_title }}</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ site_title }}</h1>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            {% for sheet_name in sheets.keys() %}
+            <button class="tab-button {% if loop.first %}active{% endif %}"
+                onclick="openTab(event, '{{ sheet_name }}')">
+                {{ sheet_name }}
+            </button>
+            {% endfor %}
+        </div>
+
+        <main>
+            {% for sheet_name, videos in sheets.items() %}
+            <section id="{{ sheet_name }}" class="sheet-section {% if loop.first %}active{% endif %}">
+                <div class="video-grid">
+                    {% for video in videos %}
+                    <div class="video-card" onclick="openVideo('{{ video.id }}')">
+                        <div class="thumbnail">
+                            <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
+                            <div class="play-icon">▶</div>
+                        </div>
+                        <div class="info">
+                            <h3>{{ video.title }}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endfor %}
+        </main>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeVideo()">&times;</span>
+            <div id="playerContainer"></div>
+        </div>
+    </div>
+
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>
