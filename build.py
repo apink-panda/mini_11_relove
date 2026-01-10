@@ -64,7 +64,7 @@ def build_site():
     html_output = template.render(
         sheets=all_videos,
         current_sheet='Love Me More',
-        site_title="Apink Comeback Collection"
+        site_title="Apink Comeback 整理"
     )
     
     with open('index.html', 'w', encoding='utf-8') as f:
