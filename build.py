@@ -9,6 +9,7 @@ SHEET_ID = '1YN3_ehOl7SPNXnxn5ob7j6GAcrRF00W-4seatqcSQEY'
 SHEETS = {
     'Love Me More': '0',
     'Sunshine': '1164317946',
+    'Hold My Hand': '761520964',
     '經典歌曲': '1115179049',
     '訪問': '1065948851',
     '應援': '1456843045',
