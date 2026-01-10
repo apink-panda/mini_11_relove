@@ -50,8 +50,13 @@ function openTab(evt, sheetName) {
     evt.currentTarget.classList.add("active");
 }
 
-function changeLanguage(lang) {
-    if (!translations) return;
+console.log("main.js loaded");
+
+window.changeLanguage = function (lang) {
+    if (typeof translations === 'undefined') {
+        console.error("Translations not loaded");
+        return;
+    }
 
     // Update Site Title
     const titleKey = document.querySelector('h1[data-key]').getAttribute('data-key');
