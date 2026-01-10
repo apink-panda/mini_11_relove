@@ -9,6 +9,8 @@ SHEET_ID = '1YN3_ehOl7SPNXnxn5ob7j6GAcrRF00W-4seatqcSQEY'
 SHEETS = {
     'Love Me More': '0',
     'Sunshine': '1164317946',
+    '經典歌曲': '1115179049',
+    '訪問': '1065948851',
 }
 
 def get_video_id(url):
@@ -53,13 +55,20 @@ def build_site():
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template('index.html')
     
+def get_all_videos():
+    """Fetches videos for all sheets."""
     all_videos = {}
-    
-    # For now, just one sheet
     for sheet_name, gid in SHEETS.items():
         videos = fetch_data(SHEET_ID, gid)
         all_videos[sheet_name] = videos
         print(f"Found {len(videos)} videos for '{sheet_name}'")
+    return all_videos
+
+def build_site():
+    env = Environment(loader=FileSystemLoader('templates'))
+    template = env.get_template('index.html')
+    
+    all_videos = get_all_videos()
     
     html_output = template.render(
         sheets=all_videos,
