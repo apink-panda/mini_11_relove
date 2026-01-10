@@ -49,3 +49,51 @@ function openTab(evt, sheetName) {
     document.getElementById(sheetName).classList.add("active");
     evt.currentTarget.classList.add("active");
 }
+
+function changeLanguage(lang) {
+    if (!translations) return;
+
+    // Update Site Title
+    const titleKey = document.querySelector('h1[data-key]').getAttribute('data-key');
+    if (translations[titleKey] && translations[titleKey][lang]) {
+        document.querySelector('h1[data-key]').textContent = translations[titleKey][lang];
+    }
+
+    // Update Tab Buttons
+    const buttons = document.querySelectorAll('.tab-button[data-key]');
+    buttons.forEach(btn => {
+        const key = btn.getAttribute('data-key');
+        if (translations.tabs[key] && translations.tabs[key][lang]) {
+            btn.textContent = translations.tabs[key][lang];
+        }
+    });
+
+    // Save preference (optional, implementing for better UX)
+    localStorage.setItem('preferredLanguage', lang);
+}
+
+function detectUserLanguage() {
+    const lang = navigator.language || navigator.userLanguage;
+    if (!lang) return null;
+
+    const code = lang.toLowerCase();
+
+    if (code.startsWith('zh')) return 'TC'; // Simplified or Traditional, default to TC for this app
+    if (code.startsWith('ko')) return 'KR';
+    if (code.startsWith('ja')) return 'JP';
+    if (code.startsWith('en')) return 'EN';
+
+    return null; // Fallback to default (TC) if unknown
+}
+
+// Load saved language or auto-detect or default to TC
+const savedLang = localStorage.getItem('preferredLanguage') || detectUserLanguage() || 'TC';
+
+// We need to wait for DOM to be ready to run changeLanguage if we want to set initial state purely by JS,
+// but since the server renders TC by default, we only need to change if savedLang != TC.
+if (savedLang !== 'TC') {
+    // Wrap in DOMContentLoaded to ensure elements exist
+    document.addEventListener('DOMContentLoaded', () => {
+        changeLanguage(savedLang);
+    });
+}

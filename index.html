@@ -4,50 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apink Comeback 整理</title>
+    <title>Apink 回歸整理</title>
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>Apink Comeback 整理</h1>
+            <h1 data-key="site_title">Apink 回歸整理</h1>
+            <div class="language-switcher">
+                <button onclick="changeLanguage('TC')">繁體中文</button>
+                <button onclick="changeLanguage('KR')">한국어</button>
+                <button onclick="changeLanguage('EN')">English</button>
+                <button onclick="changeLanguage('JP')">日本語</button>
+            </div>
         </header>
 
         <!-- Tab Navigation -->
         <div class="tabs">
             
-            <button class="tab-button active"
-                onclick="openTab(event, 'Love Me More')">
+            <button class="tab-button active" onclick="openTab(event, 'Love Me More')"
+                data-key="Love Me More">
                 Love Me More
             </button>
             
-            <button class="tab-button "
-                onclick="openTab(event, 'Sunshine')">
+            <button class="tab-button " onclick="openTab(event, 'Sunshine')"
+                data-key="Sunshine">
                 Sunshine
             </button>
             
-            <button class="tab-button "
-                onclick="openTab(event, 'Hold My Hand')">
+            <button class="tab-button " onclick="openTab(event, 'Hold My Hand')"
+                data-key="Hold My Hand">
                 Hold My Hand
             </button>
             
-            <button class="tab-button "
-                onclick="openTab(event, '經典歌曲')">
+            <button class="tab-button " onclick="openTab(event, '經典歌曲')"
+                data-key="經典歌曲">
                 經典歌曲
             </button>
             
-            <button class="tab-button "
-                onclick="openTab(event, '訪問')">
+            <button class="tab-button " onclick="openTab(event, '訪問')"
+                data-key="訪問">
                 訪問
             </button>
             
-            <button class="tab-button "
-                onclick="openTab(event, '應援')">
+            <button class="tab-button " onclick="openTab(event, '應援')"
+                data-key="應援">
                 應援
             </button>
             
         </div>
+
+        <script>
+            const translations = {"site_title": {"TC": "Apink \u56de\u6b78\u6574\u7406", "KR": "\uc5d0\uc774\ud551\ud06c \ucef4\ubc31 \uc815\ub9ac", "EN": "Apink Comeback Archive", "JP": "Apink \u30ab\u30e0\u30d0\u30c3\u30af\u307e\u3068\u3081"}, "tabs": {"Love Me More": {"TC": "Love Me More", "KR": "Love Me More", "EN": "Love Me More", "JP": "Love Me More"}, "Sunshine": {"TC": "Sunshine", "KR": "Sunshine", "EN": "Sunshine", "JP": "Sunshine"}, "Hold My Hand": {"TC": "Hold My Hand", "KR": "Hold My Hand", "EN": "Hold My Hand", "JP": "Hold My Hand"}, "\u7d93\u5178\u6b4c\u66f2": {"TC": "\u7d93\u5178\u6b4c\u66f2", "KR": "\uba85\uace1", "EN": "Classic Songs", "JP": "\u540d\u66f2"}, "\u8a2a\u554f": {"TC": "\u8a2a\u554f", "KR": "\uc778\ud130\ubdf0/\uc608\ub2a5", "EN": "Interview", "JP": "\u30a4\u30f3\u30bf\u30d3\u30e5\u30fc"}, "\u61c9\u63f4": {"TC": "\u61c9\u63f4", "KR": "\uc751\uc6d0\ubc95", "EN": "Fanchant", "JP": "\u5fdc\u63f4"}}};
+        </script>
 
         <main>
             

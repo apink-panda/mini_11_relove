@@ -11,18 +11,28 @@
 <body>
     <div class="container">
         <header>
-            <h1>{{ site_title }}</h1>
+            <h1 data-key="site_title">{{ site_title }}</h1>
+            <div class="language-switcher">
+                <button onclick="changeLanguage('TC')">繁體中文</button>
+                <button onclick="changeLanguage('KR')">한국어</button>
+                <button onclick="changeLanguage('EN')">English</button>
+                <button onclick="changeLanguage('JP')">日本語</button>
+            </div>
         </header>
 
         <!-- Tab Navigation -->
         <div class="tabs">
             {% for sheet_name in sheets.keys() %}
-            <button class="tab-button {% if loop.first %}active{% endif %}"
-                onclick="openTab(event, '{{ sheet_name }}')">
+            <button class="tab-button {% if loop.first %}active{% endif %}" onclick="openTab(event, '{{ sheet_name }}')"
+                data-key="{{ sheet_name }}">
                 {{ sheet_name }}
             </button>
             {% endfor %}
         </div>
+
+        <script>
+            const translations = {{ translations_json | safe }};
+        </script>
 
         <main>
             {% for sheet_name, videos in sheets.items() %}

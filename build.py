@@ -4,6 +4,8 @@ import os
 import re
 from jinja2 import Environment, FileSystemLoader
 
+import json
+
 # Configuration
 SHEET_ID = '1YN3_ehOl7SPNXnxn5ob7j6GAcrRF00W-4seatqcSQEY'
 SHEETS = {
@@ -13,6 +15,23 @@ SHEETS = {
     '經典歌曲': '1115179049',
     '訪問': '1065948851',
     '應援': '1456843045',
+}
+
+TRANSLATIONS = {
+    'site_title': {
+        'TC': 'Apink 回歸整理',
+        'KR': '에이핑크 컴백 정리',
+        'EN': 'Apink Comeback Archive',
+        'JP': 'Apink カムバックまとめ'
+    },
+    'tabs': {
+        'Love Me More': {'TC': 'Love Me More', 'KR': 'Love Me More', 'EN': 'Love Me More', 'JP': 'Love Me More'},
+        'Sunshine': {'TC': 'Sunshine', 'KR': 'Sunshine', 'EN': 'Sunshine', 'JP': 'Sunshine'},
+        'Hold My Hand': {'TC': 'Hold My Hand', 'KR': 'Hold My Hand', 'EN': 'Hold My Hand', 'JP': 'Hold My Hand'},
+        '經典歌曲': {'TC': '經典歌曲', 'KR': '명곡', 'EN': 'Classic Songs', 'JP': '名曲'},
+        '訪問': {'TC': '訪問', 'KR': '인터뷰/예능', 'EN': 'Interview', 'JP': 'インタビュー'},
+        '應援': {'TC': '應援', 'KR': '응원법', 'EN': 'Fanchant', 'JP': '応援'}
+    }
 }
 
 def get_video_id(url):
@@ -75,7 +94,8 @@ def build_site():
     html_output = template.render(
         sheets=all_videos,
         current_sheet='Love Me More',
-        site_title="Apink Comeback 整理"
+        site_title=TRANSLATIONS['site_title']['TC'], # Default to TC
+        translations_json=json.dumps(TRANSLATIONS)
     )
     
     with open('index.html', 'w', encoding='utf-8') as f:
