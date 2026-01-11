@@ -37,18 +37,34 @@
             const translations = {{ translations_json | safe }};
         </script>
 
+        <!-- Sort Controls -->
+        <div class="sort-controls" style="text-align: right; margin-bottom: 10px;">
+            <button id="sortToggle" onclick="toggleSort()"
+                style="padding: 5px 10px; cursor: pointer; font-size: 0.9rem;">📅 ⬇️ Date</button>
+        </div>
+
         <main>
             {% for sheet_name, videos in sheets.items() %}
             <section id="{{ sheet_name }}" class="sheet-section {% if loop.first %}active{% endif %}">
-                <div class="video-grid">
-                    {% for video in videos %}
-                    <div class="video-card" onclick="openVideo('{{ video.id }}')">
-                        <div class="thumbnail">
-                            <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>{{ video.title }}</h3>
+                <div class="content-container">
+                    {% for date, date_group in videos|groupby('publishedAt')|reverse %}
+                    <div class="date-group" data-date="{{ date }}">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            {{ date if date else 'Unknown Date' }}
+                        </h3>
+                        <div class="video-grid">
+                            {% for video in date_group %}
+                            <div class="video-card" onclick="openVideo('{{ video.id }}')">
+                                <div class="thumbnail">
+                                    <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>{{ video.title }}</h3>
+                                </div>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                     {% endfor %}

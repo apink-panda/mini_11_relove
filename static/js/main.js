@@ -108,3 +108,51 @@ if (savedLang !== 'TC') {
         changeLanguage(savedLang);
     });
 }
+// Sort Toggle Logic
+let currentSortOrder = 'desc'; // Default state
+
+function toggleSort() {
+    currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
+    sortVideos(currentSortOrder);
+    updateSortButton();
+}
+
+function updateSortButton() {
+    const btn = document.getElementById('sortToggle');
+    if (!btn) return;
+
+    // ⬇️ = Descending (Newest First)
+    // ⬆️ = Ascending (Oldest First)
+    if (currentSortOrder === 'desc') {
+        btn.textContent = '📅 ⬇️ Date';
+    } else {
+        btn.textContent = '📅 ⬆️ Date';
+    }
+}
+
+function sortVideos(order) {
+    // Select ALL sections, not just the active one
+    const sections = document.querySelectorAll('.sheet-section');
+
+    sections.forEach(section => {
+        const container = section.querySelector('.content-container');
+        if (!container) return;
+
+        const groups = Array.from(container.getElementsByClassName('date-group'));
+
+        groups.sort((a, b) => {
+            const dateA = a.getAttribute('data-date') || '';
+            const dateB = b.getAttribute('data-date') || '';
+
+            // Simple string comparison for YYYY-MM-DD works
+            if (order === 'asc') {
+                return dateA.localeCompare(dateB);
+            } else {
+                return dateB.localeCompare(dateA);
+            }
+        });
+
+        // Re-append sorted elements
+        groups.forEach(group => container.appendChild(group));
+    });
+}

@@ -19,7 +19,7 @@
                 <button onclick="changeLanguage('JP')">日本語</button>
             </div>
             <div class="last-updated" style="font-size: 0.8rem; color: #888; margin-top: 10px;">
-                <span data-key="last_updated_label">最後更新時間</span>: 2026-01-10 22:50:44
+                <span data-key="last_updated_label">最後更新時間</span>: 2026-01-11 13:19:56
             </div>
         </header>
 
@@ -62,338 +62,434 @@
             const translations = {"site_title": {"TC": "Apink \u56de\u6b78\u6574\u7406", "KR": "\uc5d0\uc774\ud551\ud06c \ucef4\ubc31 \uc815\ub9ac", "EN": "Apink Comeback Archive", "JP": "Apink \u30ab\u30e0\u30d0\u30c3\u30af\u307e\u3068\u3081"}, "tabs": {"Love Me More": {"TC": "Love Me More", "KR": "Love Me More", "EN": "Love Me More", "JP": "Love Me More"}, "Sunshine": {"TC": "Sunshine", "KR": "Sunshine", "EN": "Sunshine", "JP": "Sunshine"}, "Hold My Hand": {"TC": "Hold My Hand", "KR": "Hold My Hand", "EN": "Hold My Hand", "JP": "Hold My Hand"}, "\u7d93\u5178\u6b4c\u66f2": {"TC": "\u7d93\u5178\u6b4c\u66f2", "KR": "\uba85\uace1", "EN": "Classic Songs", "JP": "\u540d\u66f2"}, "\u8a2a\u554f": {"TC": "\u8a2a\u554f", "KR": "\uc778\ud130\ubdf0/\uc608\ub2a5", "EN": "Interview", "JP": "\u30a4\u30f3\u30bf\u30d3\u30e5\u30fc"}, "\u61c9\u63f4": {"TC": "\u61c9\u63f4", "KR": "\uc751\uc6d0\ubc95", "EN": "Fanchant", "JP": "\u5fdc\u63f4"}}, "last_updated_label": {"TC": "\u6700\u5f8c\u66f4\u65b0\u6642\u9593", "KR": "\ub9c8\uc9c0\ub9c9 \uc5c5\ub370\uc774\ud2b8", "EN": "Last Updated", "JP": "\u6700\u7d42\u66f4\u65b0"}};
         </script>
 
+        <!-- Sort Controls -->
+        <div class="sort-controls" style="text-align: right; margin-bottom: 10px;">
+            <button id="sortToggle" onclick="toggleSort()"
+                style="padding: 5px 10px; cursor: pointer; font-size: 0.9rem;">📅 ⬇️ Date</button>
+        </div>
+
         <main>
             
             <section id="Love Me More" class="sheet-section active">
-                <div class="video-grid">
+                <div class="content-container">
                     
-                    <div class="video-card" onclick="openVideo('y2os26sMjOg')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/y2os26sMjOg/maxresdefault.jpg" alt="Apink (에이핑크) 'Love Me More' M/V">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink (에이핑크) 'Love Me More' M/V</h3>
+                    <div class="date-group" data-date="2026-01-11">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-11
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('OekRvZf-v-Y')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/OekRvZf-v-Y/maxresdefault.jpg" alt="[입덕직캠] 에이핑크 정은지 직캠 4K 'Love Me More' (Apink EunJi FanCam) | @MCOUNTDOWN_2026.1.8">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[입덕직캠] 에이핑크 정은지 직캠 4K 'Love Me More' (Apink EunJi FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('9iz_6SzAbZg')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/9iz_6SzAbZg/maxresdefault.jpg" alt="[입덕직캠] 에이핑크 윤보미 직캠 4K 'Love Me More' (Apink BoMi FanCam) | @MCOUNTDOWN_2026.1.8">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[입덕직캠] 에이핑크 윤보미 직캠 4K 'Love Me More' (Apink BoMi FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('eU-XKTAJmT8')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/eU-XKTAJmT8/maxresdefault.jpg" alt="Apink (에이핑크) - Love Me More | Show! MusicCore | MBC260110방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink (에이핑크) - Love Me More | Show! MusicCore | MBC260110방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('FM_W7qP6m34')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/FM_W7qP6m34/maxresdefault.jpg" alt="[#음중풀캠] Apink (에이핑크) – Love Me More FullCam | 쇼! 음악중심 | MBC260110">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[#음중풀캠] Apink (에이핑크) – Love Me More FullCam | 쇼! 음악중심 | MBC260110</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('H6LbfN7KQZs')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/H6LbfN7KQZs/maxresdefault.jpg" alt="[#음중직캠] Apink KIM NAMJOO (에이핑크 김남주) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[#음중직캠] Apink KIM NAMJOO (에이핑크 김남주) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('BzQzuvM51WA')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/BzQzuvM51WA/maxresdefault.jpg" alt="[#음중직캠] Apink PARK CHORONG (에이핑크 박초롱) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[#음중직캠] Apink PARK CHORONG (에이핑크 박초롱) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('lNBohTZluf8')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/lNBohTZluf8/maxresdefault.jpg" alt="[#음중직캠] Apink JEONG EUNJI (에이핑크 정은지) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[#음중직캠] Apink JEONG EUNJI (에이핑크 정은지) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('1GHH1XSuFUM')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/1GHH1XSuFUM/maxresdefault.jpg" alt="[#음중직캠] Apink YOON BOMI (에이핑크 윤보미) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[#음중직캠] Apink YOON BOMI (에이핑크 윤보미) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('cZnIn3O2f2M')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/cZnIn3O2f2M/maxresdefault.jpg" alt="[#음중직캠] Apink OH HAYOUNG (에이핑크 오하영) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[#음중직캠] Apink OH HAYOUNG (에이핑크 오하영) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('TDcshXsoZN8')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/TDcshXsoZN8/maxresdefault.jpg" alt="Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('mAIPUoNntu0')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/mAIPUoNntu0/maxresdefault.jpg" alt="[가로] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[가로] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('kkcgqc019I4')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/kkcgqc019I4/maxresdefault.jpg" alt="[세로] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[세로] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('QgD7GyxV-vY')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/QgD7GyxV-vY/maxresdefault.jpg" alt="[하이라이트] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[하이라이트] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('P0MiBa1I0ck')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/P0MiBa1I0ck/maxresdefault.jpg" alt="[릴레이댄스] 에이핑크(Apink) - Love Me More (4K)">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[릴레이댄스] 에이핑크(Apink) - Love Me More (4K)</h3>
+                    <div class="date-group" data-date="2026-01-10">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-10
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('AwFEIbgcY1U')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/AwFEIbgcY1U/maxresdefault.jpg" alt="Apink - Love Me More | Music Core EP930 | KOCOWA+">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink - Love Me More | Music Core EP930 | KOCOWA+</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('eU-XKTAJmT8')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/eU-XKTAJmT8/maxresdefault.jpg" alt="Apink (에이핑크) - Love Me More | Show! MusicCore | MBC260110방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink (에이핑크) - Love Me More | Show! MusicCore | MBC260110방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('FM_W7qP6m34')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/FM_W7qP6m34/maxresdefault.jpg" alt="[#음중풀캠] Apink (에이핑크) – Love Me More FullCam | 쇼! 음악중심 | MBC260110">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[#음중풀캠] Apink (에이핑크) – Love Me More FullCam | 쇼! 음악중심 | MBC260110</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('H6LbfN7KQZs')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/H6LbfN7KQZs/maxresdefault.jpg" alt="[#음중직캠] Apink KIM NAMJOO (에이핑크 김남주) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[#음중직캠] Apink KIM NAMJOO (에이핑크 김남주) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('BzQzuvM51WA')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/BzQzuvM51WA/maxresdefault.jpg" alt="[#음중직캠] Apink PARK CHORONG (에이핑크 박초롱) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[#음중직캠] Apink PARK CHORONG (에이핑크 박초롱) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('lNBohTZluf8')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/lNBohTZluf8/maxresdefault.jpg" alt="[#음중직캠] Apink JEONG EUNJI (에이핑크 정은지) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[#음중직캠] Apink JEONG EUNJI (에이핑크 정은지) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('1GHH1XSuFUM')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/1GHH1XSuFUM/maxresdefault.jpg" alt="[#음중직캠] Apink YOON BOMI (에이핑크 윤보미) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[#음중직캠] Apink YOON BOMI (에이핑크 윤보미) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('cZnIn3O2f2M')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/cZnIn3O2f2M/maxresdefault.jpg" alt="[#음중직캠] Apink OH HAYOUNG (에이핑크 오하영) – Love Me More FanCam | 쇼! 음악중심 | MBC260110">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[#음중직캠] Apink OH HAYOUNG (에이핑크 오하영) – Love Me More FanCam | 쇼! 음악중심 | MBC260110</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('QgD7GyxV-vY')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/QgD7GyxV-vY/maxresdefault.jpg" alt="[하이라이트] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[하이라이트] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('P0MiBa1I0ck')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/P0MiBa1I0ck/maxresdefault.jpg" alt="[릴레이댄스] 에이핑크(Apink) - Love Me More (4K)">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[릴레이댄스] 에이핑크(Apink) - Love Me More (4K)</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('iL0jeKQqQNk')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/iL0jeKQqQNk/maxresdefault.jpg" alt="[4K] Apink “Love me more” Band LIVE [it's Live] 現場音樂表演">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[4K] Apink “Love me more” Band LIVE [it's Live] 現場音樂表演</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('Js_2o6hd79Y')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/Js_2o6hd79Y/maxresdefault.jpg" alt="최초 공개' Apink (에이핑크) - Love Me More #엠카운트다운 EP.911 | Mnet 260108 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>최초 공개' Apink (에이핑크) - Love Me More #엠카운트다운 EP.911 | Mnet 260108 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('lZdUazFqA3k')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/lZdUazFqA3k/maxresdefault.jpg" alt="[PLAY COLOR | 4K] Apink (에이핑크) - Love Me More">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[PLAY COLOR | 4K] Apink (에이핑크) - Love Me More</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('GR1AKP9qe8U')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/GR1AKP9qe8U/maxresdefault.jpg" alt="[HYPE JUSIL] Apink (에이핑크) - Love Me More Band Ver. Live｜하입주실｜Stone LIVE">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[HYPE JUSIL] Apink (에이핑크) - Love Me More Band Ver. Live｜하입주실｜Stone LIVE</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('PHQqvLxBJy4')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/PHQqvLxBJy4/maxresdefault.jpg" alt="[COMEBACK🎉] Apink エーピンク 에이핑크 - Love Me More [Music Bank] | KBS WORLD TV 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[COMEBACK🎉] Apink エーピンク 에이핑크 - Love Me More [Music Bank] | KBS WORLD TV 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('b49_b3HYVFw')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/b49_b3HYVFw/maxresdefault.jpg" alt="Apink - Love Me More | Music Bank EP1274 | KOCOWA+">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink - Love Me More | Music Bank EP1274 | KOCOWA+</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('_IIi5JbgiVU')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/_IIi5JbgiVU/maxresdefault.jpg" alt="Love Me More - Apink (에이핑크) [뮤직뱅크/Music Bank] | KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Love Me More - Apink (에이핑크) [뮤직뱅크/Music Bank] | KBS 260109 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('DPLmunuRi1U')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/DPLmunuRi1U/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 김남주 직캠 'Love Me More' (Apink KIM NAMJOO Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 김남주 직캠 'Love Me More' (Apink KIM NAMJOO Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('0cUVxiNjOPM')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/0cUVxiNjOPM/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 정은지 직캠 'Love Me More' (Apink JEONG EUNJI Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 정은지 직캠 'Love Me More' (Apink JEONG EUNJI Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('R0UnMc6dPyM')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/R0UnMc6dPyM/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 윤보미 직캠 'Love Me More' (Apink YOON BOMI Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 윤보미 직캠 'Love Me More' (Apink YOON BOMI Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('096QzJjs-g8')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/096QzJjs-g8/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 박초롱 직캠 'Love Me More' (Apink PARK CHORONG Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 박초롱 직캠 'Love Me More' (Apink PARK CHORONG Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('3Vs_fjZZxMY')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/3Vs_fjZZxMY/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 오하영 직캠 'Love Me More' (Apink OH HAYOUNG Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 오하영 직캠 'Love Me More' (Apink OH HAYOUNG Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('0bfhrr7ZfAo')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/0bfhrr7ZfAo/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 직캠 8K 'Love Me More' (Apink FanCam) | @MCOUNTDOWN_2026.1.8">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[MPD직캠] 에이핑크 직캠 8K 'Love Me More' (Apink FanCam) | @MCOUNTDOWN_2026.1.8</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('EbSmyy7KL84')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/EbSmyy7KL84/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 박초롱 직캠 4K 'Love Me More' (Apink ChoRong FanCam) | @MCOUNTDOWN_2026.1.8">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[MPD직캠] 에이핑크 박초롱 직캠 4K 'Love Me More' (Apink ChoRong FanCam) | @MCOUNTDOWN_2026.1.8</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('qIDLxnmjNDM')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/qIDLxnmjNDM/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 윤보미 직캠 4K 'Love Me More' (Apink BoMi FanCam) | @MCOUNTDOWN_2026.1.8">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[MPD직캠] 에이핑크 윤보미 직캠 4K 'Love Me More' (Apink BoMi FanCam) | @MCOUNTDOWN_2026.1.8</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('_LT9O3PssIY')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/_LT9O3PssIY/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 김남주 직캠 4K 'Love Me More' (Apink NamJoo FanCam) | @MCOUNTDOWN_2026.1.8">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[MPD직캠] 에이핑크 김남주 직캠 4K 'Love Me More' (Apink NamJoo FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                    <div class="date-group" data-date="2026-01-09">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-09
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('TDcshXsoZN8')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/TDcshXsoZN8/maxresdefault.jpg" alt="Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('mAIPUoNntu0')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/mAIPUoNntu0/maxresdefault.jpg" alt="[가로] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[가로] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('kkcgqc019I4')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/kkcgqc019I4/maxresdefault.jpg" alt="[세로] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[세로] Apink (에이핑크) - Love Me More [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('iL0jeKQqQNk')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/iL0jeKQqQNk/maxresdefault.jpg" alt="[4K] Apink “Love me more” Band LIVE [it's Live] 現場音樂表演">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[4K] Apink “Love me more” Band LIVE [it's Live] 現場音樂表演</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('lZdUazFqA3k')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/lZdUazFqA3k/maxresdefault.jpg" alt="[PLAY COLOR | 4K] Apink (에이핑크) - Love Me More">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[PLAY COLOR | 4K] Apink (에이핑크) - Love Me More</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('PHQqvLxBJy4')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/PHQqvLxBJy4/maxresdefault.jpg" alt="[COMEBACK🎉] Apink エーピンク 에이핑크 - Love Me More [Music Bank] | KBS WORLD TV 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[COMEBACK🎉] Apink エーピンク 에이핑크 - Love Me More [Music Bank] | KBS WORLD TV 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('b49_b3HYVFw')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/b49_b3HYVFw/maxresdefault.jpg" alt="Apink - Love Me More | Music Bank EP1274 | KOCOWA+">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink - Love Me More | Music Bank EP1274 | KOCOWA+</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('_IIi5JbgiVU')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/_IIi5JbgiVU/maxresdefault.jpg" alt="Love Me More - Apink (에이핑크) [뮤직뱅크/Music Bank] | KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Love Me More - Apink (에이핑크) [뮤직뱅크/Music Bank] | KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('DPLmunuRi1U')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/DPLmunuRi1U/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 김남주 직캠 'Love Me More' (Apink KIM NAMJOO Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 김남주 직캠 'Love Me More' (Apink KIM NAMJOO Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('0cUVxiNjOPM')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/0cUVxiNjOPM/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 정은지 직캠 'Love Me More' (Apink JEONG EUNJI Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 정은지 직캠 'Love Me More' (Apink JEONG EUNJI Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('R0UnMc6dPyM')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/R0UnMc6dPyM/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 윤보미 직캠 'Love Me More' (Apink YOON BOMI Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 윤보미 직캠 'Love Me More' (Apink YOON BOMI Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('096QzJjs-g8')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/096QzJjs-g8/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 박초롱 직캠 'Love Me More' (Apink PARK CHORONG Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 박초롱 직캠 'Love Me More' (Apink PARK CHORONG Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('3Vs_fjZZxMY')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/3Vs_fjZZxMY/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 오하영 직캠 'Love Me More' (Apink OH HAYOUNG Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 오하영 직캠 'Love Me More' (Apink OH HAYOUNG Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('ALRYf9-oobI')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/ALRYf9-oobI/maxresdefault.jpg" alt="쿨룩 LIVE ▷ Apink(에이핑크) 'Love Me More' / [이은지의 가요광장] I KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>쿨룩 LIVE ▷ Apink(에이핑크) 'Love Me More' / [이은지의 가요광장] I KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('Tfr1v7B3NqA')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/Tfr1v7B3NqA/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 오하영 직캠 4K 'Love Me More' (Apink HaYoung FanCam) | @MCOUNTDOWN_2026.1.8">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[MPD직캠] 에이핑크 오하영 직캠 4K 'Love Me More' (Apink HaYoung FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                    <div class="date-group" data-date="2026-01-08">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-08
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('Js_2o6hd79Y')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/Js_2o6hd79Y/maxresdefault.jpg" alt="최초 공개' Apink (에이핑크) - Love Me More #엠카운트다운 EP.911 | Mnet 260108 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>최초 공개' Apink (에이핑크) - Love Me More #엠카운트다운 EP.911 | Mnet 260108 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('GR1AKP9qe8U')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/GR1AKP9qe8U/maxresdefault.jpg" alt="[HYPE JUSIL] Apink (에이핑크) - Love Me More Band Ver. Live｜하입주실｜Stone LIVE">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[HYPE JUSIL] Apink (에이핑크) - Love Me More Band Ver. Live｜하입주실｜Stone LIVE</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('0bfhrr7ZfAo')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/0bfhrr7ZfAo/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 직캠 8K 'Love Me More' (Apink FanCam) | @MCOUNTDOWN_2026.1.8">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[MPD직캠] 에이핑크 직캠 8K 'Love Me More' (Apink FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('EbSmyy7KL84')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/EbSmyy7KL84/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 박초롱 직캠 4K 'Love Me More' (Apink ChoRong FanCam) | @MCOUNTDOWN_2026.1.8">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[MPD직캠] 에이핑크 박초롱 직캠 4K 'Love Me More' (Apink ChoRong FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('qIDLxnmjNDM')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/qIDLxnmjNDM/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 윤보미 직캠 4K 'Love Me More' (Apink BoMi FanCam) | @MCOUNTDOWN_2026.1.8">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[MPD직캠] 에이핑크 윤보미 직캠 4K 'Love Me More' (Apink BoMi FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('_LT9O3PssIY')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/_LT9O3PssIY/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 김남주 직캠 4K 'Love Me More' (Apink NamJoo FanCam) | @MCOUNTDOWN_2026.1.8">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[MPD직캠] 에이핑크 김남주 직캠 4K 'Love Me More' (Apink NamJoo FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('Tfr1v7B3NqA')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/Tfr1v7B3NqA/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 오하영 직캠 4K 'Love Me More' (Apink HaYoung FanCam) | @MCOUNTDOWN_2026.1.8">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[MPD직캠] 에이핑크 오하영 직캠 4K 'Love Me More' (Apink HaYoung FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('Mxb-2XRxMYE')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/Mxb-2XRxMYE/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 정은지 직캠 4K 'Love Me More' (Apink EunJi FanCam) | @MCOUNTDOWN_2026.1.8">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[MPD직캠] 에이핑크 정은지 직캠 4K 'Love Me More' (Apink EunJi FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('Mxb-2XRxMYE')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/Mxb-2XRxMYE/maxresdefault.jpg" alt="[MPD직캠] 에이핑크 정은지 직캠 4K 'Love Me More' (Apink EunJi FanCam) | @MCOUNTDOWN_2026.1.8">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[MPD직캠] 에이핑크 정은지 직캠 4K 'Love Me More' (Apink EunJi FanCam) | @MCOUNTDOWN_2026.1.8</h3>
+                    <div class="date-group" data-date="2026-01-07">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-07
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('RyGVGRpyIV0')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/RyGVGRpyIV0/maxresdefault.jpg" alt="[집방캠][4K] 에이핑크(Apink) - 'Love Me More' LIVE | 두시탈출 컬투쇼 | 260107">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[집방캠][4K] 에이핑크(Apink) - 'Love Me More' LIVE | 두시탈출 컬투쇼 | 260107</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('RyGVGRpyIV0')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/RyGVGRpyIV0/maxresdefault.jpg" alt="[집방캠][4K] 에이핑크(Apink) - 'Love Me More' LIVE | 두시탈출 컬투쇼 | 260107">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[집방캠][4K] 에이핑크(Apink) - 'Love Me More' LIVE | 두시탈출 컬투쇼 | 260107</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('ALRYf9-oobI')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/ALRYf9-oobI/maxresdefault.jpg" alt="쿨룩 LIVE ▷ Apink(에이핑크) 'Love Me More' / [이은지의 가요광장] I KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>쿨룩 LIVE ▷ Apink(에이핑크) 'Love Me More' / [이은지의 가요광장] I KBS 260109 방송</h3>
+                    <div class="date-group" data-date="2026-01-05">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-05
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('y2os26sMjOg')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/y2os26sMjOg/maxresdefault.jpg" alt="Apink (에이핑크) 'Love Me More' M/V">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink (에이핑크) 'Love Me More' M/V</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
@@ -401,95 +497,115 @@
             </section>
             
             <section id="Sunshine" class="sheet-section ">
-                <div class="video-grid">
+                <div class="content-container">
                     
-                    <div class="video-card" onclick="openVideo('EOqM_wzPXjI')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/EOqM_wzPXjI/maxresdefault.jpg" alt="[SUB] 1000살까지 장수가 목표인 천년돌 ｜ 재친구 Ep.96 ｜에이핑크 김재중">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[SUB] 1000살까지 장수가 목표인 천년돌 ｜ 재친구 Ep.96 ｜에이핑크 김재중</h3>
+                    <div class="date-group" data-date="2026-01-09">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-09
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('EOqM_wzPXjI')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/EOqM_wzPXjI/maxresdefault.jpg" alt="[SUB] 1000살까지 장수가 목표인 천년돌 ｜ 재친구 Ep.96 ｜에이핑크 김재중">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[SUB] 1000살까지 장수가 목표인 천년돌 ｜ 재친구 Ep.96 ｜에이핑크 김재중</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('VXwDW0ghQz0')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/VXwDW0ghQz0/maxresdefault.jpg" alt="[COMEBACK🎉] Apink エーピンク 에이핑크 - Sunshine [Music Bank] | KBS WORLD TV 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[COMEBACK🎉] Apink エーピンク 에이핑크 - Sunshine [Music Bank] | KBS WORLD TV 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('KxuFubCzteU')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/KxuFubCzteU/maxresdefault.jpg" alt="Sunshine - Apink (에이핑크) [뮤직뱅크/Music Bank] | KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Sunshine - Apink (에이핑크) [뮤직뱅크/Music Bank] | KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('P34yP2EQpDs')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/P34yP2EQpDs/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 박초롱 직캠 'Sunshine' (Apink PARK CHORONG Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 박초롱 직캠 'Sunshine' (Apink PARK CHORONG Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('s-aVVz2xTDA')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/s-aVVz2xTDA/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 윤보미 직캠 'Sunshine' (Apink YOON BOMI Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 윤보미 직캠 'Sunshine' (Apink YOON BOMI Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('lF_XM9WUK9w')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/lF_XM9WUK9w/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 김남주 직캠 'Sunshine' (Apink KIM NAMJOO Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 김남주 직캠 'Sunshine' (Apink KIM NAMJOO Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('qAJHL_np5Xg')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/qAJHL_np5Xg/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 오하영 직캠 'Sunshine' (Apink OH HAYOUNG Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 오하영 직캠 'Sunshine' (Apink OH HAYOUNG Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('Zc4x8PSqf6E')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/Zc4x8PSqf6E/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 정은지 직캠 'Sunshine' (Apink JEONG EUNJI Fancam) @뮤직뱅크(Music Bank) 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[K-Fancam] 에이핑크 정은지 직캠 'Sunshine' (Apink JEONG EUNJI Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('VXwDW0ghQz0')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/VXwDW0ghQz0/maxresdefault.jpg" alt="[COMEBACK🎉] Apink エーピンク 에이핑크 - Sunshine [Music Bank] | KBS WORLD TV 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[COMEBACK🎉] Apink エーピンク 에이핑크 - Sunshine [Music Bank] | KBS WORLD TV 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('KxuFubCzteU')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/KxuFubCzteU/maxresdefault.jpg" alt="Sunshine - Apink (에이핑크) [뮤직뱅크/Music Bank] | KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Sunshine - Apink (에이핑크) [뮤직뱅크/Music Bank] | KBS 260109 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('8fZVewtGrlQ')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/8fZVewtGrlQ/maxresdefault.jpg" alt="'최초 공개' Apink (에이핑크) - Sunshine #엠카운트다운 EP.911 | Mnet 260108 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>'최초 공개' Apink (에이핑크) - Sunshine #엠카운트다운 EP.911 | Mnet 260108 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('P34yP2EQpDs')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/P34yP2EQpDs/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 박초롱 직캠 'Sunshine' (Apink PARK CHORONG Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 박초롱 직캠 'Sunshine' (Apink PARK CHORONG Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('s-aVVz2xTDA')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/s-aVVz2xTDA/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 윤보미 직캠 'Sunshine' (Apink YOON BOMI Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 윤보미 직캠 'Sunshine' (Apink YOON BOMI Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('lF_XM9WUK9w')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/lF_XM9WUK9w/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 김남주 직캠 'Sunshine' (Apink KIM NAMJOO Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 김남주 직캠 'Sunshine' (Apink KIM NAMJOO Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('qAJHL_np5Xg')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/qAJHL_np5Xg/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 오하영 직캠 'Sunshine' (Apink OH HAYOUNG Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 오하영 직캠 'Sunshine' (Apink OH HAYOUNG Fancam) @뮤직뱅크(Music Bank) 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('Zc4x8PSqf6E')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/Zc4x8PSqf6E/maxresdefault.jpg" alt="[K-Fancam] 에이핑크 정은지 직캠 'Sunshine' (Apink JEONG EUNJI Fancam) @뮤직뱅크(Music Bank) 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[K-Fancam] 에이핑크 정은지 직캠 'Sunshine' (Apink JEONG EUNJI Fancam) @뮤직뱅크(Music Bank) 260109</h3>
+                    <div class="date-group" data-date="2026-01-08">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-08
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('8fZVewtGrlQ')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/8fZVewtGrlQ/maxresdefault.jpg" alt="'최초 공개' Apink (에이핑크) - Sunshine #엠카운트다운 EP.911 | Mnet 260108 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>'최초 공개' Apink (에이핑크) - Sunshine #엠카운트다운 EP.911 | Mnet 260108 방송</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
@@ -497,25 +613,45 @@
             </section>
             
             <section id="Hold My Hand" class="sheet-section ">
-                <div class="video-grid">
+                <div class="content-container">
                     
-                    <div class="video-card" onclick="openVideo('_ntgnS6NPWE')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/_ntgnS6NPWE/maxresdefault.jpg" alt="Apink (에이핑크) - Hold My Hand (손을 잡아줘) | Show! MusicCore | MBC260110방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink (에이핑크) - Hold My Hand (손을 잡아줘) | Show! MusicCore | MBC260110방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('ScJIlnUGVXI')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/ScJIlnUGVXI/maxresdefault.jpg" alt="[#음중풀캠] Apink (에이핑크) – 손을 잡아줘 FullCam | 쇼! 음악중심 | MBC260110">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[#음중풀캠] Apink (에이핑크) – 손을 잡아줘 FullCam | 쇼! 음악중심 | MBC260110</h3>
+                    <div class="date-group" data-date="2026-01-10">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-10
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('_ntgnS6NPWE')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/_ntgnS6NPWE/maxresdefault.jpg" alt="Apink (에이핑크) - Hold My Hand (손을 잡아줘) | Show! MusicCore | MBC260110방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink (에이핑크) - Hold My Hand (손을 잡아줘) | Show! MusicCore | MBC260110방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('ScJIlnUGVXI')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/ScJIlnUGVXI/maxresdefault.jpg" alt="[#음중풀캠] Apink (에이핑크) – 손을 잡아줘 FullCam | 쇼! 음악중심 | MBC260110">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[#음중풀캠] Apink (에이핑크) – 손을 잡아줘 FullCam | 쇼! 음악중심 | MBC260110</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('5apQ1SO4JBk')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/5apQ1SO4JBk/maxresdefault.jpg" alt="Apink - Hold My Hand | Music Core EP930 | KOCOWA+">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink - Hold My Hand | Music Core EP930 | KOCOWA+</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
@@ -523,55 +659,75 @@
             </section>
             
             <section id="經典歌曲" class="sheet-section ">
-                <div class="video-grid">
+                <div class="content-container">
                     
-                    <div class="video-card" onclick="openVideo('Pma3CokTkhw')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/Pma3CokTkhw/maxresdefault.jpg" alt="'명불허전' Apink (에이핑크) - My My (Band VER) #더시즌즈 #10cm의쓰담쓰담 ㅣ KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>'명불허전' Apink (에이핑크) - My My (Band VER) #더시즌즈 #10cm의쓰담쓰담 ㅣ KBS 260109 방송</h3>
+                    <div class="date-group" data-date="2026-01-10">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-10
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('-hzvIpXKsIg')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/-hzvIpXKsIg/maxresdefault.jpg" alt="[하이라이트] Apink (에이핑크) - NoNoNo (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[하이라이트] Apink (에이핑크) - NoNoNo (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('eQ9EwtrUfZY')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/eQ9EwtrUfZY/maxresdefault.jpg" alt="[하이라이트] Apink (에이핑크) - My My (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[하이라이트] Apink (에이핑크) - My My (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('T3wzZ7ixG2c')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/T3wzZ7ixG2c/maxresdefault.jpg" alt="Apink (에이핑크) - Mr. Chu + U You + NoNoNo (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink (에이핑크) - Mr. Chu + U You + NoNoNo (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('8hH8k4Tn0Fk')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/8hH8k4Tn0Fk/maxresdefault.jpg" alt="Apink (에이핑크) - 알아요 (몰라요 2026 VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink (에이핑크) - 알아요 (몰라요 2026 VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('-hzvIpXKsIg')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/-hzvIpXKsIg/maxresdefault.jpg" alt="[하이라이트] Apink (에이핑크) - NoNoNo (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[하이라이트] Apink (에이핑크) - NoNoNo (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('eQ9EwtrUfZY')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/eQ9EwtrUfZY/maxresdefault.jpg" alt="[하이라이트] Apink (에이핑크) - My My (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[하이라이트] Apink (에이핑크) - My My (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 방송</h3>
+                    <div class="date-group" data-date="2026-01-09">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-09
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('Pma3CokTkhw')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/Pma3CokTkhw/maxresdefault.jpg" alt="'명불허전' Apink (에이핑크) - My My (Band VER) #더시즌즈 #10cm의쓰담쓰담 ㅣ KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>'명불허전' Apink (에이핑크) - My My (Band VER) #더시즌즈 #10cm의쓰담쓰담 ㅣ KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('T3wzZ7ixG2c')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/T3wzZ7ixG2c/maxresdefault.jpg" alt="Apink (에이핑크) - Mr. Chu + U You + NoNoNo (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink (에이핑크) - Mr. Chu + U You + NoNoNo (Band VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('8hH8k4Tn0Fk')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/8hH8k4Tn0Fk/maxresdefault.jpg" alt="Apink (에이핑크) - 알아요 (몰라요 2026 VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink (에이핑크) - 알아요 (몰라요 2026 VER.) [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
@@ -579,105 +735,175 @@
             </section>
             
             <section id="訪問" class="sheet-section ">
-                <div class="video-grid">
+                <div class="content-container">
                     
-                    <div class="video-card" onclick="openVideo('Le6uYIqD2h0')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/Le6uYIqD2h0/maxresdefault.jpg" alt="(SUB) Apink Diary 2026 EP.01 (SOUNDWAVE [RE : LOVE] POP-UP CAFE 방문기)">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>(SUB) Apink Diary 2026 EP.01 (SOUNDWAVE [RE : LOVE] POP-UP CAFE 방문기)</h3>
+                    <div class="date-group" data-date="2026-01-11">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-11
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('kkFkXPOoGYM')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/kkFkXPOoGYM/maxresdefault.jpg" alt="Interview with Apink - Music Core (260110)">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Interview with Apink - Music Core (260110)</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('pS-dZYwke4U')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/pS-dZYwke4U/maxresdefault.jpg" alt="(ENG)[MusicBank Interview Cam] 에이핑크 (Apink Interview)l@MusicBank KBS 260109">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>(ENG)[MusicBank Interview Cam] 에이핑크 (Apink Interview)l@MusicBank KBS 260109</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('EeWlO2AUImw')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/EeWlO2AUImw/maxresdefault.jpg" alt="ENG] Love Me More 만큼 더 중독성 있는 티키타카 | 에이핑크 | 유인라디오 S2 EP.08">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>ENG] Love Me More 만큼 더 중독성 있는 티키타카 | 에이핑크 | 유인라디오 S2 EP.08</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('_ijoVpneawA')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/_ijoVpneawA/maxresdefault.jpg" alt="에이핑크에게 〈Love Me More〉 포인트 안무 배우는 10CM😎 [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>에이핑크에게 〈Love Me More〉 포인트 안무 배우는 10CM😎 [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
+                    <div class="date-group" data-date="2026-01-10">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-10
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('Le6uYIqD2h0')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/Le6uYIqD2h0/maxresdefault.jpg" alt="(SUB) Apink Diary 2026 EP.01 (SOUNDWAVE [RE : LOVE] POP-UP CAFE 방문기)">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>(SUB) Apink Diary 2026 EP.01 (SOUNDWAVE [RE : LOVE] POP-UP CAFE 방문기)</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('3IGSddYHV4w')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/3IGSddYHV4w/maxresdefault.jpg" alt="[SUB] 에이핑크 올해 5살입니다 10살은 무거워서 집에 두고 다녀요 | 집대성 ep.90 에이핑크">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[SUB] 에이핑크 올해 5살입니다 10살은 무거워서 집에 두고 다녀요 | 집대성 ep.90 에이핑크</h3>
+                    <div class="date-group" data-date="2026-01-09">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-09
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('pS-dZYwke4U')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/pS-dZYwke4U/maxresdefault.jpg" alt="(ENG)[MusicBank Interview Cam] 에이핑크 (Apink Interview)l@MusicBank KBS 260109">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>(ENG)[MusicBank Interview Cam] 에이핑크 (Apink Interview)l@MusicBank KBS 260109</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('EeWlO2AUImw')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/EeWlO2AUImw/maxresdefault.jpg" alt="ENG] Love Me More 만큼 더 중독성 있는 티키타카 | 에이핑크 | 유인라디오 S2 EP.08">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>ENG] Love Me More 만큼 더 중독성 있는 티키타카 | 에이핑크 | 유인라디오 S2 EP.08</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('_ijoVpneawA')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/_ijoVpneawA/maxresdefault.jpg" alt="에이핑크에게 〈Love Me More〉 포인트 안무 배우는 10CM😎 [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>에이핑크에게 〈Love Me More〉 포인트 안무 배우는 10CM😎 [더 시즌즈-10CM의 쓰담쓰담] | KBS 260109 방송</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('3IGSddYHV4w')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/3IGSddYHV4w/maxresdefault.jpg" alt="[SUB] 에이핑크 올해 5살입니다 10살은 무거워서 집에 두고 다녀요 | 집대성 ep.90 에이핑크">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[SUB] 에이핑크 올해 5살입니다 10살은 무거워서 집에 두고 다녀요 | 집대성 ep.90 에이핑크</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('rzY6vz4p6Y0')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/rzY6vz4p6Y0/maxresdefault.jpg" alt="사랑은 있어야 해요!! 보미언니에게 ‘LOVE ME MORE'">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>사랑은 있어야 해요!! 보미언니에게 ‘LOVE ME MORE'</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('OlWsDlL4KFo')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/OlWsDlL4KFo/maxresdefault.jpg" alt="[SUB] 1000살까지 장수가 목표인 천년돌 ｜ 재친구 Ep.96 ｜에이핑크 김재중">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[SUB] 1000살까지 장수가 목표인 천년돌 ｜ 재친구 Ep.96 ｜에이핑크 김재중</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('fZIZvyN-RUs')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/fZIZvyN-RUs/maxresdefault.jpg" alt="Apink (에이핑크) 'Love Me More' M/V Reaction">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink (에이핑크) 'Love Me More' M/V Reaction</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('12iAsOUWuNc')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/12iAsOUWuNc/maxresdefault.jpg" alt="[EN/JP] 광고❌ 이거 없음 스케줄 못 해! 부기 관리 최종템 공개 | BB 삐삐 | EP.08 에이핑크 남주&하영 | [SUB]">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>[EN/JP] 광고❌ 이거 없음 스케줄 못 해! 부기 관리 최종템 공개 | BB 삐삐 | EP.08 에이핑크 남주&하영 | [SUB]</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="video-card" onclick="openVideo('bDqfirYHJ9g')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/bDqfirYHJ9g/maxresdefault.jpg" alt="술집에서 음원인 척하고 라이브하기 (ft. 에이핑크) [백그라운드 라이브] | JAYKEEOUT">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>술집에서 음원인 척하고 라이브하기 (ft. 에이핑크) [백그라운드 라이브] | JAYKEEOUT</h3>
+                    <div class="date-group" data-date="2026-01-08">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-08
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('OlWsDlL4KFo')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/OlWsDlL4KFo/maxresdefault.jpg" alt="[SUB] 1000살까지 장수가 목표인 천년돌 ｜ 재친구 Ep.96 ｜에이핑크 김재중">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[SUB] 1000살까지 장수가 목표인 천년돌 ｜ 재친구 Ep.96 ｜에이핑크 김재중</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="video-card" onclick="openVideo('bDqfirYHJ9g')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/bDqfirYHJ9g/maxresdefault.jpg" alt="술집에서 음원인 척하고 라이브하기 (ft. 에이핑크) [백그라운드 라이브] | JAYKEEOUT">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>술집에서 음원인 척하고 라이브하기 (ft. 에이핑크) [백그라운드 라이브] | JAYKEEOUT</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
-                    <div class="video-card" onclick="openVideo('rzY6vz4p6Y0')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/rzY6vz4p6Y0/maxresdefault.jpg" alt="사랑은 있어야 해요!! 보미언니에게 ‘LOVE ME MORE'">
-                            <div class="play-icon">▶</div>
+                    <div class="date-group" data-date="2026-01-07">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-07
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('fZIZvyN-RUs')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/fZIZvyN-RUs/maxresdefault.jpg" alt="Apink (에이핑크) 'Love Me More' M/V Reaction">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink (에이핑크) 'Love Me More' M/V Reaction</h3>
+                                </div>
+                            </div>
+                            
                         </div>
-                        <div class="info">
-                            <h3>사랑은 있어야 해요!! 보미언니에게 ‘LOVE ME MORE'</h3>
+                    </div>
+                    
+                    <div class="date-group" data-date="2026-01-06">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-06
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('12iAsOUWuNc')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/12iAsOUWuNc/maxresdefault.jpg" alt="[EN/JP] 광고❌ 이거 없음 스케줄 못 해! 부기 관리 최종템 공개 | BB 삐삐 | EP.08 에이핑크 남주&하영 | [SUB]">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>[EN/JP] 광고❌ 이거 없음 스케줄 못 해! 부기 관리 최종템 공개 | BB 삐삐 | EP.08 에이핑크 남주&하영 | [SUB]</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     
@@ -685,15 +911,25 @@
             </section>
             
             <section id="應援" class="sheet-section ">
-                <div class="video-grid">
+                <div class="content-container">
                     
-                    <div class="video-card" onclick="openVideo('oMjk4hyjiNo')">
-                        <div class="thumbnail">
-                            <img src="https://img.youtube.com/vi/oMjk4hyjiNo/maxresdefault.jpg" alt="Apink (에이핑크) 'Love Me More' 응원법 (Fanchant Guide)">
-                            <div class="play-icon">▶</div>
-                        </div>
-                        <div class="info">
-                            <h3>Apink (에이핑크) 'Love Me More' 응원법 (Fanchant Guide)</h3>
+                    <div class="date-group" data-date="2026-01-05">
+                        <h3 class="date-header"
+                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                            2026-01-05
+                        </h3>
+                        <div class="video-grid">
+                            
+                            <div class="video-card" onclick="openVideo('oMjk4hyjiNo')">
+                                <div class="thumbnail">
+                                    <img src="https://img.youtube.com/vi/oMjk4hyjiNo/maxresdefault.jpg" alt="Apink (에이핑크) 'Love Me More' 응원법 (Fanchant Guide)">
+                                    <div class="play-icon">▶</div>
+                                </div>
+                                <div class="info">
+                                    <h3>Apink (에이핑크) 'Love Me More' 응원법 (Fanchant Guide)</h3>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     

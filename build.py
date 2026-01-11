@@ -7,6 +7,10 @@ from jinja2 import Environment, FileSystemLoader
 import json
 
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Configuration
 SHEET_ID = '1YN3_ehOl7SPNXnxn5ob7j6GAcrRF00W-4seatqcSQEY'
@@ -51,6 +55,36 @@ def get_video_id(url):
     match = re.search(regex, url)
     return match.group(1) if match else None
 
+def fetch_video_dates(video_ids):
+    """Fetches publish dates for a list of video IDs using YouTube Data API."""
+    api_key = os.getenv('YOUTUBE_API_KEY')
+    if not api_key:
+        print("Warning: YOUTUBE_API_KEY not found. Skipping date fetch.")
+        return {}
+
+    video_dates = {}
+    
+    # Process in batches of 50 (YouTube API limit)
+    for i in range(0, len(video_ids), 50):
+        batch = video_ids[i:i+50]
+        ids_str = ','.join(batch)
+        url = f'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={ids_str}&key={api_key}'
+        
+        try:
+            # Add Referer header to match API Key restrictions
+            headers = {'Referer': 'https://apink-panda.com'}
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                for item in data.get('items', []):
+                    video_dates[item['id']] = item['snippet']['publishedAt']
+            else:
+                print(f"Error fetching dates: {response.status_code} - {response.text}")
+        except Exception as e:
+            print(f"Exception fetching dates: {e}")
+            
+    return video_dates
+
 def fetch_data(sheet_id, gid='0'):
     """Fetches CSV data from Google Sheets."""
     url = f'https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}'
@@ -75,6 +109,24 @@ def fetch_data(sheet_id, gid='0'):
                     'title': str(title).strip(),
                     'thumbnail': f'https://img.youtube.com/vi/{vid_id}/maxresdefault.jpg' # High quality thumb: maxresdefault
                 })
+
+        # Fetch dates and sort
+        if data:
+            video_ids = [v['id'] for v in data]
+            dates_map = fetch_video_dates(video_ids)
+            
+            for v in data:
+                # Add date to video object, default to empty string if not found
+                # Format ISO date to YYYY-MM-DD for display if needed, or keep for sorting
+                raw_date = dates_map.get(v['id'], '')
+                v['publishedAt'] = raw_date[:10] if raw_date else ''
+                
+            # Sort by publishedAt descending (newest first)
+            # Empty dates will be at the end if we use a key that handles them
+            # Sort by publishedAt descending (newest first)
+            # Empty dates will be at the end if we use a key that handles them
+            data.sort(key=lambda x: x.get('publishedAt', ''), reverse=True)
+            
         return data
     except Exception as e:
         print(f"Error fetching data: {e}")
