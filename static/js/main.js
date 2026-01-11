@@ -58,28 +58,33 @@ window.changeLanguage = function (lang) {
         return;
     }
 
-    // Update Site Title
-    const titleKey = document.querySelector('h1[data-key]').getAttribute('data-key');
-    if (translations[titleKey] && translations[titleKey][lang]) {
-        document.querySelector('h1[data-key]').textContent = translations[titleKey][lang];
-    }
+    // Update all elements with data-key generically
+    const elements = document.querySelectorAll('[data-key]');
+    elements.forEach(elem => {
+        const key = elem.getAttribute('data-key');
 
-    // Update Last Updated Label
-    const lastUpdatedKey = document.querySelector('span[data-key="last_updated_label"]').getAttribute('data-key');
-    if (translations[lastUpdatedKey] && translations[lastUpdatedKey][lang]) {
-        document.querySelector('span[data-key="last_updated_label"]').textContent = translations[lastUpdatedKey][lang];
-    }
+        // Special case for tabs which are nested in TRANSLATIONS.tabs
+        if (elem.classList.contains('tab-button')) {
+            if (translations.tabs && translations.tabs[key] && translations.tabs[key][lang]) {
+                elem.textContent = translations.tabs[key][lang];
+            }
+            return;
+        }
 
-    // Update Tab Buttons
-    const buttons = document.querySelectorAll('.tab-button[data-key]');
-    buttons.forEach(btn => {
-        const key = btn.getAttribute('data-key');
-        if (translations.tabs[key] && translations.tabs[key][lang]) {
-            btn.textContent = translations.tabs[key][lang];
+        if (translations[key] && translations[key][lang]) {
+            // Handle regular text content
+            if (elem.hasAttribute('data-key')) {
+                // If it's the panda link, update the title (tooltip)
+                if (elem.classList.contains('panda-link')) {
+                    elem.setAttribute('title', translations[key][lang]);
+                } else {
+                    elem.textContent = translations[key][lang];
+                }
+            }
         }
     });
 
-    // Save preference (optional, implementing for better UX)
+    // Save preference
     localStorage.setItem('preferredLanguage', lang);
 }
 
@@ -97,8 +102,19 @@ function detectUserLanguage() {
     return null; // Fallback to default (TC) if unknown
 }
 
-// Load saved language or auto-detect or default to TC
-const savedLang = localStorage.getItem('preferredLanguage') || detectUserLanguage() || 'TC';
+// Load saved language or read from URL or auto-detect or default to TC
+function getUrlLang() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('lang');
+}
+
+const urlLang = getUrlLang();
+const savedLang = urlLang || localStorage.getItem('preferredLanguage') || detectUserLanguage() || 'TC';
+
+// Apply URL lang to localStorage if provided
+if (urlLang) {
+    localStorage.setItem('preferredLanguage', urlLang);
+}
 
 // We need to wait for DOM to be ready to run changeLanguage if we want to set initial state purely by JS,
 // but since the server renders TC by default, we only need to change if savedLang != TC.
@@ -107,6 +123,13 @@ if (savedLang !== 'TC') {
     document.addEventListener('DOMContentLoaded', () => {
         changeLanguage(savedLang);
     });
+}
+
+// Function to open about page with current language
+window.openAboutPage = function (event) {
+    event.preventDefault();
+    const currentLang = localStorage.getItem('preferredLanguage') || 'TC';
+    window.open('about.html?lang=' + currentLang, '_blank');
 }
 // Sort Toggle Logic
 let currentSortOrder = 'desc'; // Default state

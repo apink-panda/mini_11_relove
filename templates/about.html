@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="about_site_title">技術分享 | Apink 回歸整理站</title>
+    <link rel="stylesheet" href="static/css/style.css?v={{ version }}">
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-content h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5em;
+            color: var(--primary-color);
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.3em;
+        }
+
+        .article-content h3 {
+            font-size: 1.4rem;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            color: var(--text-color);
+        }
+
+        .article-content p {
+            line-height: 1.8;
+            margin-bottom: 1.2em;
+            color: var(--text-color);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-bottom: 1.2em;
+            padding-left: 1.5em;
+            color: var(--text-color);
+        }
+
+        .article-content li {
+            margin-bottom: 0.5em;
+        }
+
+        .article-content code {
+            background-color: rgba(233, 30, 99, 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--primary-color);
+        }
+
+        .article-content pre {
+            background-color: #2d2d2d;
+            padding: 1.5em;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5em;
+        }
+
+        .article-content pre code {
+            background-color: transparent;
+            color: #f8f8f2;
+            padding: 0;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+
+        /* Language switcher on about page */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-home" data-key="about_back_home">← 回到首頁</a>
+            <div class="language-switcher">
+                <button onclick="changeLanguage('TC')">繁體中文</button>
+                <button onclick="changeLanguage('KR')">한국어</button>
+                <button onclick="changeLanguage('EN')">English</button>
+                <button onclick="changeLanguage('JP')">日本語</button>
+            </div>
+        </header>
+
+        <div class="article-container">
+            <article class="article-content">
+                <h1 data-key="about_article_title">[技術分享] 為了 Apink 回歸！如何在一天內打造全自動更新的 YT 整理網站</h1>
+
+                <h2 data-key="about_preface_title">前言：迷妹/迷弟的極限開發</h2>
+                <p data-key="about_preface_p1">作為一個 Panda (Apink 粉絲)，看到 Apink 帶著 Mini
+                    11《RELOVE》回歸，心情激動之餘，也發現大量的物料（MV、Live 舞台、綜藝、電台、應援法）散落在 YouTube
+                    各處。為了讓大家能更方便地補檔，我決定做一個整理網站。</p>
+                <p data-key="about_preface_p2">
+                    但問題是：<strong>我只有不到一天的時間</strong>。回歸期每一分每一秒都很珍貴，我不能花太多時間在寫扣上，但又希望網站能自動更新、介面好看。</p>
+                <p data-key="about_preface_p3">這篇文章將分享我如何利用 <strong>Python + Google Sheets + GitHub
+                        Actions</strong>，在一天內快速搭建出一個自動化、低成本且易於維護的偶像回歸整理站。</p>
+
+                <h2 data-key="about_arch_title">核心架構：什麼最快？</h2>
+                <p data-key="about_arch_p1">為了追求極致的開發速度與最低的維護成本，我選擇了以下的「非典型」技術堆疊：</p>
+                <ol>
+                    <li data-key="about_arch_li1"><strong>CMS (內容管理系統) -> Google Sheets</strong><br>
+                        <strong>為什麼？</strong> 沒有比 Excel/Sheets 更直覺的後台了。手機也能編輯，方便隨時隨地新增影片網址。
+                    </li>
+                    <li data-key="about_arch_li2"><strong>後端/建置 -> Python (Pandas + Jinja2)</strong><br>
+                        <strong>為什麼？</strong> Python 處理資料最強。用 Pandas 讀取 Sheets，用 Jinja2 產生 HTML。
+                    </li>
+                    <li data-key="about_arch_li3"><strong>資料庫 -> 無 (Static Site)</strong><br>
+                        <strong>為什麼？</strong> 靜態網頁最快，免費託管選擇多（GitHub Pages, Vercel 等）。
+                    </li>
+                    <li data-key="about_arch_li4"><strong>自動化 -> GitHub Actions</strong><br>
+                        <strong>為什麼？</strong> 只要我更新 Google Sheets，觸發 Action，它就自動跑 Python 腳本更新網頁並 Push 回去。
+                    </li>
+                </ol>
+
+                <h2 data-key="about_tech_title">技術實作細節</h2>
+
+                <h3 data-key="about_tech_s1_title">1. Google Sheets 當作簡易資料庫</h3>
+                <p data-key="about_tech_s1_p1">我建立了一個 Google Sheet，裡面有好幾個分頁（Tab），分別對應「主打歌」、「收錄曲」、「綜藝」等分類。欄位只需要一個「YouTube
+                    連結」和選填的「標題」。</p>
+                <p data-key="about_tech_s1_p2">在程式碼中，我直接使用 Sheets 的 CSV 輸出功能，不需要申請複雜的 Google API 權限，只要公開試算表即可：</p>
+                <pre><code># build.py
+def fetch_data(sheet_id, gid='0'):
+    url = f'https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}'
+    df = pd.read_csv(url, header=None)
+    # ... 處理資料</code></pre>
+
+                <h3 data-key="about_tech_s2_title">2. 自動抓取 YouTube 資訊 (省去手動輸入)</h3>
+                <p data-key="about_tech_s2_p1">為了讓整理更輕鬆，我不想手動複製貼上影片標題和發布日期。所以我接了 <strong>YouTube Data API</strong> 和
+                    <strong>oEmbed</strong>。</p>
+                <ul>
+                    <li data-key="about_tech_s2_li1"><strong>標題</strong>：利用 <code>oEmbed</code> 介面，不需要 API Key 也能抓到標題。
+                    </li>
+                    <li data-key="about_tech_s2_li2"><strong>日期</strong>：為了做「按時間排序」的功能，我使用 YouTube Data API 批次抓取影片的
+                        <code>publishedAt</code>。</li>
+                </ul>
+                <pre><code># build.py (簡化版)
+def fetch_youtube_title(video_url):
+    oembed_url = f"https://www.youtube.com/oembed?url={video_url}&format=json"
+    data = requests.get(oembed_url).json()
+    return data.get('title')</code></pre>
+                <p data-key="about_tech_s2_p2">這樣我只需要在 Excel 貼上網址，標題 and 日期都會由程式自動補完。</p>
+
+                <h3 data-key="about_tech_s3_title">3. 靜態網頁生成 (SSG)</h3>
+                <p data-key="about_tech_s3_p1">雖然現在有 Next.js / Nuxt 這些強大的框架，但對於這種單頁應用，寫一個簡單的 Python Script 搭配 Jinja2
+                    模板是最快的。</p>
+                <p data-key="about_tech_s3_p2">流程如下：</p>
+                <ol>
+                    <li data-key="about_tech_s3_li1">Python 跑蟲把資料抓下來整理成 JSON 物件。</li>
+                    <li data-key="about_tech_s3_li2">將資料倒進 <code>index.html</code> 的 Jinja2 模板。</li>
+                    <li data-key="about_tech_s3_li3">輸出最終的 <code>index.html</code>。</li>
+                </ol>
+
+                <h3 data-key="about_tech_s4_title">4. GitHub Actions 實現 CI/CD</h3>
+                <p data-key="about_tech_s4_p1">這是最關鍵的一步。我寫了一個 Workflow，每當我 Push Code 或是手動觸發時，它會：</p>
+                <ol>
+                    <li data-key="about_tech_s4_li1">Check out 程式碼。</li>
+                    <li data-key="about_tech_s4_li2">安裝 Python 環境。</li>
+                    <li data-key="about_tech_s4_li3">執行 <code>build.py</code> (抓新資料 -> 產出新 HTML)。</li>
+                    <li data-key="about_tech_s4_li4">將變更的 <code>index.html</code> Commit 並 Push 回儲存庫。</li>
+                </ol>
+                <p data-key="about_tech_s4_p2">這樣一來，網站隨時保持最新，而且完全不用手動去 deploy。</p>
+                <pre><code>{% raw %}# .github/workflows/build.yml
+steps:
+  - name: Build site
+    env:
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    run: python3 build.py
+
+  - name: Commit and push changes
+    run: |
+      git config --local user.email "action@github.com"
+      git add index.html
+      git commit -m "Auto-update index.html"
+      git push{% endraw %}</code></pre>
+
+                <h2 data-key="about_highlight_title">前端亮點：多語系與簡單互動</h2>
+                <p data-key="about_highlight_p1">前端部分保持簡單，使用了 Vanilla JS (原生 JavaScript)。特別加了一個功能：<strong>多語系切換</strong>
+                    (繁中/韓/英/日)，讓海外粉絲也能使用。這是透過一個簡單的 JS 字典替換 DOM 文字實現的。</p>
+                <pre><code>// 多語系切換邏輯
+function changeLanguage(lang) {
+    document.querySelectorAll('[data-key]').forEach(elem => {
+        const key = elem.getAttribute('data-key');
+        if (translations[key] && translations[key][lang]) {
+            elem.textContent = translations[key][lang];
+        }
+    });
+}</code></pre>
+
+                <h2 data-key="about_result_title">成果與心得</h2>
+                <p data-key="about_result_p1">這套系統的優點在於：</p>
+                <ol>
+                    <li data-key="about_result_li1"><strong>快</strong>：開發快，讀取快（純靜態檔）。</li>
+                    <li data-key="about_result_li2"><strong>省</strong>：完全免費（GitHub Actions + Google Sheets）。</li>
+                    <li data-key="about_result_li3"><strong>懶</strong>：更新資料只需要動手指貼連結到 Google Sheets。</li>
+                </ol>
+                <p data-key="about_result_p2">不到一天的時間，就完成了一個能自動排列時間、支援多語系、視覺風格符合此次回歸概念（粉黑配色）的整理站。</p>
+                <p data-key="about_result_p3">對於想要快速整理資訊並分享給社群的工程師來說，這套「Google Sheets + Python SSG + GitHub
+                    Actions」的組合拳，絕對是 CP 值最高的選擇！</p>
+
+                <hr style="border: 1px solid var(--primary-color); margin: 40px 0; opacity: 0.3;">
+                <p style="text-align: center; font-style: italic; font-weight: bold;" data-key="about_fighting">Apink
+                    FIGHTING! RELOVE 大發！</p>
+            </article>
+        </div>
+    </div>
+    <script>
+        const translations = {{ translations_json | safe }};
+    </script>
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>
