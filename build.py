@@ -53,7 +53,20 @@ def get_video_id(url):
     # Handle various YouTube URL formats
     regex = r'(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})'
     match = re.search(regex, url)
+    match = re.search(regex, url)
     return match.group(1) if match else None
+
+def fetch_youtube_title(video_url):
+    """Fetches video title using YouTube oEmbed."""
+    try:
+        oembed_url = f"https://www.youtube.com/oembed?url={video_url}&format=json"
+        response = requests.get(oembed_url, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            return data.get('title')
+    except Exception as e:
+        print(f"Error fetching title for {video_url}: {e}")
+    return None
 
 def fetch_video_dates(video_ids):
     """Fetches publish dates for a list of video IDs using YouTube Data API."""
@@ -99,7 +112,14 @@ def fetch_data(sheet_id, gid='0'):
         data = []
         for _, row in df.iterrows():
             video_url = row[0]
-            title = row[1] if len(row) > 1 else "Unknown Title"
+            # Check if title exists in CSV
+            if len(row) > 1 and not pd.isna(row[1]) and str(row[1]).strip() != '':
+                title = str(row[1]).strip()
+            else:
+                # Fetch from YouTube if missing
+                print(f"Fetching title for {video_url}...")
+                fetched_title = fetch_youtube_title(video_url)
+                title = fetched_title if fetched_title else "Unknown Title"
             
             vid_id = get_video_id(video_url)
             if vid_id:
@@ -119,10 +139,9 @@ def fetch_data(sheet_id, gid='0'):
                 # Add date to video object, default to empty string if not found
                 # Format ISO date to YYYY-MM-DD for display if needed, or keep for sorting
                 raw_date = dates_map.get(v['id'], '')
-                v['publishedAt'] = raw_date[:10] if raw_date else ''
+                v['publishedAt'] = raw_date  # Keep full ISO string for accurate sorting
+                v['displayDate'] = raw_date[:10] if raw_date else ''
                 
-            # Sort by publishedAt descending (newest first)
-            # Empty dates will be at the end if we use a key that handles them
             # Sort by publishedAt descending (newest first)
             # Empty dates will be at the end if we use a key that handles them
             data.sort(key=lambda x: x.get('publishedAt', ''), reverse=True)
@@ -141,18 +160,44 @@ def get_all_videos():
         print(f"Found {len(videos)} videos for '{sheet_name}'")
     return all_videos
 
+def group_videos_by_date(videos):
+    """Groups a list of videos by their displayDate."""
+    groups = {}
+    for video in videos:
+        date = video.get('displayDate', 'Unknown Date')
+        if date not in groups:
+            groups[date] = []
+        groups[date].append(video)
+    
+    # Convert to list of objects for template, sorted by date descending
+    # (Assuming dates are YYYY-MM-DD, string sort works)
+    sorted_dates = sorted(groups.keys(), reverse=True)
+    
+    grouped_list = []
+    for date in sorted_dates:
+        grouped_list.append({
+            'date': date,
+            'videos': groups[date]
+        })
+    return grouped_list
+
 def build_site():
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template('index.html')
     
     all_videos = get_all_videos()
     
+    # Group videos for each sheet
+    grouped_videos = {}
+    for sheet, videos in all_videos.items():
+        grouped_videos[sheet] = group_videos_by_date(videos)
+    
     # Get current time
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     version_timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
     
     html_output = template.render(
-        sheets=all_videos,
+        sheets=grouped_videos,
         current_sheet='Love Me More',
         site_title=TRANSLATIONS['site_title']['TC'], # Default to TC
         translations_json=json.dumps(TRANSLATIONS),

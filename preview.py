@@ -14,12 +14,28 @@ def run_server():
     print("Building site...")
     build_site()
     
-    # Allow address reuse in case of recent restart
-    socketserver.TCPServer.allow_reuse_address = True
-    
+    # Define Handler
     Handler = http.server.SimpleHTTPRequestHandler
-    
-    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+
+    # Find a free port
+    port = PORT
+    while True:
+        try:
+            with socketserver.TCPServer(("", port), Handler) as httpd:
+                print(f"Serving at http://localhost:{port}")
+                print("Opening browser...")
+                webbrowser.open(f"http://localhost:{port}/index.html")
+                try:
+                    httpd.serve_forever()
+                except KeyboardInterrupt:
+                    print("\nServer stopped.")
+                break
+        except OSError:
+            print(f"Port {port} is in use, trying {port + 1}...")
+            port += 1
+            if port > 8100:
+                print("Could not find a free port.")
+                break
         print(f"Serving at http://localhost:{PORT}")
         print("Opening browser...")
         webbrowser.open(f"http://localhost:{PORT}/index.html")

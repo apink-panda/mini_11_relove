@@ -44,17 +44,14 @@
         </div>
 
         <main>
-            {% for sheet_name, videos in sheets.items() %}
+            {% for sheet_name, groups in sheets.items() %}
             <section id="{{ sheet_name }}" class="sheet-section {% if loop.first %}active{% endif %}">
                 <div class="content-container">
-                    {% for date, date_group in videos|groupby('publishedAt')|reverse %}
-                    <div class="date-group" data-date="{{ date }}">
-                        <h3 class="date-header"
-                            style="color: #ff69b4; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px;">
-                            {{ date if date else 'Unknown Date' }}
-                        </h3>
+                    {% for group in groups %}
+                    <div class="date-group" data-date="{{ group.date }}">
+                        <h3 class="date-header">{{ group.date }}</h3>
                         <div class="video-grid">
-                            {% for video in date_group %}
+                            {% for video in group.videos %}
                             <div class="video-card" onclick="openVideo('{{ video.id }}')">
                                 <div class="thumbnail">
                                     <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
