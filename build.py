@@ -149,13 +149,15 @@ def build_site():
     
     # Get current time
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    version_timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
     
     html_output = template.render(
         sheets=all_videos,
         current_sheet='Love Me More',
         site_title=TRANSLATIONS['site_title']['TC'], # Default to TC
         translations_json=json.dumps(TRANSLATIONS),
-        last_updated=current_time
+        last_updated=current_time,
+        version=version_timestamp
     )
     
     with open('index.html', 'w', encoding='utf-8') as f:
