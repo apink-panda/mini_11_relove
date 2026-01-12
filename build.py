@@ -21,6 +21,7 @@ SHEETS = {
     '經典歌曲': '1115179049',
     '訪問': '1065948851',
     '應援': '1456843045',
+    'Apink Diary': '807890805',
 }
 
 TRANSLATIONS = {
@@ -36,7 +37,8 @@ TRANSLATIONS = {
         'Hold My Hand': {'TC': 'Hold My Hand', 'KR': 'Hold My Hand', 'EN': 'Hold My Hand', 'JP': 'Hold My Hand'},
         '經典歌曲': {'TC': '經典歌曲', 'KR': '명곡', 'EN': 'Classic Songs', 'JP': '名曲'},
         '訪問': {'TC': '訪問', 'KR': '인터뷰/예능', 'EN': 'Interview', 'JP': 'インタビュー'},
-        '應援': {'TC': '應援', 'KR': '응원법', 'EN': 'Fanchant', 'JP': '応援'}
+        '應援': {'TC': '應援', 'KR': '응원법', 'EN': 'Fanchant', 'JP': '応援'},
+        'Apink Diary': {'TC': 'Apink Diary', 'KR': 'Apink Diary', 'EN': 'Apink Diary', 'JP': 'Apink Diary'}
     },
     'last_updated_label': {
         'TC': '最後更新時間',
