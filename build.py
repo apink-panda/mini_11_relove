@@ -15,6 +15,7 @@ load_dotenv()
 # Configuration
 SHEET_ID = '1YN3_ehOl7SPNXnxn5ob7j6GAcrRF00W-4seatqcSQEY'
 SHEETS = {
+    'Winning': '2037301453',
     'Love Me More': '0',
     'Sunshine': '1164317946',
     'Hold My Hand': '761520964',
@@ -32,6 +33,7 @@ TRANSLATIONS = {
         'JP': 'Apink カムバックまとめ'
     },
     'tabs': {
+        'Winning': {'TC': '一位', 'KR': '1위', 'EN': 'No.1', 'JP': '1位'},
         'Love Me More': {'TC': 'Love Me More', 'KR': 'Love Me More', 'EN': 'Love Me More', 'JP': 'Love Me More'},
         'Sunshine': {'TC': 'Sunshine', 'KR': 'Sunshine', 'EN': 'Sunshine', 'JP': 'Sunshine'},
         'Hold My Hand': {'TC': 'Hold My Hand', 'KR': 'Hold My Hand', 'EN': 'Hold My Hand', 'JP': 'Hold My Hand'},
@@ -378,12 +380,6 @@ def fetch_video_dates(video_ids):
 
 def fetch_data(sheet_id, gid='0'):
     """Fetches CSV data from Google Sheets."""
-    # Special badges for specific video IDs (e.g., First Win videos)
-    # Use translation keys from TRANSLATIONS dictionary
-    VIDEO_BADGES = {
-        'gPNM1KzoN_4': 'badge_first_win',  # First Win for Apink's comeback with "Love Me More"
-    }
-    
     url = f'https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}'
     try:
         print(f"Fetching data from {url}...")
@@ -405,13 +401,7 @@ def fetch_data(sheet_id, gid='0'):
                 fetched_title = fetch_youtube_title(video_url)
                 title = fetched_title if fetched_title else "Unknown Title"
             
-            # Check for badge in 3rd column or from VIDEO_BADGES
             vid_id = get_video_id(video_url)
-            badge = None
-            if len(row) > 2 and not pd.isna(row[2]) and str(row[2]).strip() != '':
-                badge = str(row[2]).strip()
-            elif vid_id and vid_id in VIDEO_BADGES:
-                badge = VIDEO_BADGES[vid_id]
             
             if vid_id:
                 video_data = {
@@ -420,8 +410,6 @@ def fetch_data(sheet_id, gid='0'):
                     'title': str(title).strip(),
                     'thumbnail': f'https://img.youtube.com/vi/{vid_id}/maxresdefault.jpg' # High quality thumb: maxresdefault
                 }
-                if badge:
-                    video_data['badge'] = badge
                 data.append(video_data)
 
         # Fetch dates and sort
@@ -492,7 +480,7 @@ def build_site():
     
     html_output = template.render(
         sheets=grouped_videos,
-        current_sheet='Love Me More',
+        current_sheet='Winning',
         site_title=TRANSLATIONS['site_title']['TC'], # Default to TC
         translations_json=json.dumps(TRANSLATIONS),
         translations_dict=TRANSLATIONS,
