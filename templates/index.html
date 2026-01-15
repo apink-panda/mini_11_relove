@@ -59,6 +59,10 @@
                                 <div class="thumbnail">
                                     <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
                                     <div class="play-icon">▶</div>
+                                    {% if video.badge %}
+                                    <div class="ribbon" data-key="{{ video.badge }}">{{
+                                        translations_dict[video.badge]['TC'] }}</div>
+                                    {% endif %}
                                 </div>
                                 <div class="info">
                                     <h3>{{ video.title }}</h3>

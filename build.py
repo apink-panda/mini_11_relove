@@ -315,6 +315,12 @@ TRANSLATIONS = {
         'KR': '에이핑크 파이팅! RELOVE 대박!',
         'EN': 'Apink FIGHTING! RELOVE Success!',
         'JP': 'Apink ファイティン！ RELOVE 大ヒット！'
+    },
+    'badge_first_win': {
+        'TC': '獲得一位',
+        'KR': '1위',
+        'EN': '1st Win',
+        'JP': '1位獲得'
     }
 }
 
@@ -372,12 +378,18 @@ def fetch_video_dates(video_ids):
 
 def fetch_data(sheet_id, gid='0'):
     """Fetches CSV data from Google Sheets."""
+    # Special badges for specific video IDs (e.g., First Win videos)
+    # Use translation keys from TRANSLATIONS dictionary
+    VIDEO_BADGES = {
+        'gPNM1KzoN_4': 'badge_first_win',  # First Win for Apink's comeback with "Love Me More"
+    }
+    
     url = f'https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}'
     try:
         print(f"Fetching data from {url}...")
         df = pd.read_csv(url, header=None) # Assuming no header based on preview, or maybe first row is header?
         # Looking at previous output: 
-        # https://www.youtube.com/watch?v=iL0jeKQqQNk,[4K] Apink “Love me more” Band LIVE [it's Live] 現場音樂表演
+        # https://www.youtube.com/watch?v=iL0jeKQqQNk,[4K] Apink "Love me more" Band LIVE [it's Live] 現場音樂表演
         # It seems row 1 is data, not header.
         
         # Let's clean it up
@@ -393,14 +405,24 @@ def fetch_data(sheet_id, gid='0'):
                 fetched_title = fetch_youtube_title(video_url)
                 title = fetched_title if fetched_title else "Unknown Title"
             
+            # Check for badge in 3rd column or from VIDEO_BADGES
             vid_id = get_video_id(video_url)
+            badge = None
+            if len(row) > 2 and not pd.isna(row[2]) and str(row[2]).strip() != '':
+                badge = str(row[2]).strip()
+            elif vid_id and vid_id in VIDEO_BADGES:
+                badge = VIDEO_BADGES[vid_id]
+            
             if vid_id:
-                data.append({
+                video_data = {
                     'id': vid_id,
                     'url': f'https://www.youtube.com/watch?v={vid_id}',
                     'title': str(title).strip(),
                     'thumbnail': f'https://img.youtube.com/vi/{vid_id}/maxresdefault.jpg' # High quality thumb: maxresdefault
-                })
+                }
+                if badge:
+                    video_data['badge'] = badge
+                data.append(video_data)
 
         # Fetch dates and sort
         if data:
@@ -473,6 +495,7 @@ def build_site():
         current_sheet='Love Me More',
         site_title=TRANSLATIONS['site_title']['TC'], # Default to TC
         translations_json=json.dumps(TRANSLATIONS),
+        translations_dict=TRANSLATIONS,
         last_updated=current_time,
         version=version_timestamp
     )
