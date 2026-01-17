@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apink 回歸整理</title>
-    <link rel="stylesheet" href="static/css/style.css?v=20260117085433">
+    <link rel="stylesheet" href="static/css/style.css?v=20260117170946">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
                 <button onclick="changeLanguage('JP')">日本語</button>
             </div>
             <div class="last-updated" style="font-size: 0.8rem; color: #888; margin-top: 10px;">
-                <span data-key="last_updated_label">最後更新時間</span>: 2026-01-17 08:54:33
+                <span data-key="last_updated_label">最後更新時間</span>: 2026-01-17 17:09:46
             </div>
             <a href="about.html" target="_blank" class="panda-link" title="關於這個網站" data-key="about_tooltip">
                 <img src="static/img/panda_cropped.png" alt="About">
@@ -1609,10 +1609,7 @@
                         color: #333;
                     }
 
-                    .btn-fullscreen {
-                        background-color: #333;
-                        color: white;
-                    }
+
 
                     /* Horizontal scrolling for mobile, grid for desktop if space permits */
                     .fancam-grid {
@@ -1630,19 +1627,6 @@
                         border-radius: 10px;
                         overflow: hidden;
                         position: relative;
-                    }
-
-                    :fullscreen .fancam-video {
-                        height: 90vh;
-                        width: auto;
-                    }
-
-                    :fullscreen {
-                        background-color: black;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        padding: 0 20px;
                     }
                 </style>
 
@@ -1722,7 +1706,6 @@
                                 <div class="fancam-controls">
                                     <button class="btn-play" onclick="playMember(${mIndex}, this)">▶ Sync Play</button>
                                     <button class="btn-pause" onclick="pauseMember(${mIndex}, this)">⏸ Pause</button>
-                                    <button class="btn-fullscreen" onclick="toggleFullscreen(${mIndex})">⛶ Fullscreen</button>
                                 </div>
                             `;
                             groupDiv.appendChild(header);
@@ -1851,16 +1834,7 @@
                         });
                     }
 
-                    function toggleFullscreen(mIndex) {
-                        var elem = document.getElementById(`fancam-grid-${mIndex}`);
-                        if (!document.fullscreenElement) {
-                            elem.requestFullscreen().catch(err => {
-                                alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
-                            });
-                        } else {
-                            document.exitFullscreen();
-                        }
-                    }
+
 
                     // Init on load
                     document.addEventListener('DOMContentLoaded', initFanCam);
@@ -1877,7 +1851,7 @@
         </div>
     </div>
 
-    <script src="static/js/main.js?v=20260117085433"></script>
+    <script src="static/js/main.js?v=20260117170946"></script>
 </body>
 
 </html>

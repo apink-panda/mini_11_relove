@@ -117,10 +117,7 @@
                         color: #333;
                     }
 
-                    .btn-fullscreen {
-                        background-color: #333;
-                        color: white;
-                    }
+
 
                     /* Horizontal scrolling for mobile, grid for desktop if space permits */
                     .fancam-grid {
@@ -138,19 +135,6 @@
                         border-radius: 10px;
                         overflow: hidden;
                         position: relative;
-                    }
-
-                    :fullscreen .fancam-video {
-                        height: 90vh;
-                        width: auto;
-                    }
-
-                    :fullscreen {
-                        background-color: black;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        padding: 0 20px;
                     }
                 </style>
 
@@ -230,7 +214,6 @@
                                 <div class="fancam-controls">
                                     <button class="btn-play" onclick="playMember(${mIndex}, this)">▶ Sync Play</button>
                                     <button class="btn-pause" onclick="pauseMember(${mIndex}, this)">⏸ Pause</button>
-                                    <button class="btn-fullscreen" onclick="toggleFullscreen(${mIndex})">⛶ Fullscreen</button>
                                 </div>
                             `;
                             groupDiv.appendChild(header);
@@ -359,16 +342,7 @@
                         });
                     }
 
-                    function toggleFullscreen(mIndex) {
-                        var elem = document.getElementById(`fancam-grid-${mIndex}`);
-                        if (!document.fullscreenElement) {
-                            elem.requestFullscreen().catch(err => {
-                                alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
-                            });
-                        } else {
-                            document.exitFullscreen();
-                        }
-                    }
+
 
                     // Init on load
                     document.addEventListener('DOMContentLoaded', initFanCam);
