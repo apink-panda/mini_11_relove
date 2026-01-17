@@ -21,28 +21,25 @@ def run_server():
     port = PORT
     while True:
         try:
-            with socketserver.TCPServer(("", port), Handler) as httpd:
-                print(f"Serving at http://localhost:{port}")
-                print("Opening browser...")
-                webbrowser.open(f"http://localhost:{port}/index.html")
-                try:
-                    httpd.serve_forever()
-                except KeyboardInterrupt:
-                    print("\nServer stopped.")
-                break
+            # Try to bind to the port
+            # We create the server object but don't enter context manager immediately to handle bind errors cleaner
+            # actually socketserver.TCPServer binds on init. 
+            httpd = socketserver.TCPServer(("", port), Handler)
+            print(f"Serving at http://localhost:{port}")
+            print("Opening browser...")
+            webbrowser.open(f"http://localhost:{port}/index.html")
+            try:
+                httpd.serve_forever()
+            except KeyboardInterrupt:
+                print("\nServer stopped.")
+                httpd.server_close()
+            break
         except OSError:
             print(f"Port {port} is in use, trying {port + 1}...")
             port += 1
             if port > 8100:
                 print("Could not find a free port.")
                 break
-        print(f"Serving at http://localhost:{PORT}")
-        print("Opening browser...")
-        webbrowser.open(f"http://localhost:{PORT}/index.html")
-        try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("\nServer stopped.")
 
 if __name__ == "__main__":
     run_server()

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-View Player - {{ site_title }}</title>
+    <link rel="stylesheet" href="static/css/style.css?v={{ version }}">
+    <style>
+        .controls {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 2px solid var(--primary-pink);
+            border-radius: 8px;
+            font-family: inherit;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn {
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(248, 195, 205, 0.5);
+        }
+
+        .btn-secondary {
+            background-color: #ccc;
+        }
+
+        #multi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        #multi-grid.vertical-mode {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        #multi-grid.vertical-mode .player-wrapper {
+            flex: 1;
+            /* Force equal width */
+            /* Allow shrinking */
+            min-width: 0;
+            padding-bottom: 0;
+            height: auto;
+            /* Override base class height: 0 */
+            aspect-ratio: 9/16;
+            max-height: 85vh;
+            /* Prevent excessive height */
+        }
+
+        .player-wrapper {
+            position: relative;
+            /* Default 56.25% (16:9), modified by toggle */
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: padding-bottom 0.3s ease;
+        }
+
+
+
+
+
+        .player-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="nav-header">
+            <a href="index.html" class="btn btn-secondary">← Back to Home</a>
+            <h1>Multi-View Player</h1>
+            <div style="width: 100px;"></div> <!-- Spacer for centering -->
+        </header>
+
+        <div class="controls">
+            <p style="margin-bottom: 10px; color: #666;">Paste YouTube URLs below (one per line) / 請在下方貼上 YouTube
+                網址（一行一個）</p>
+            <textarea id="urlInput"
+                placeholder="https://www.youtube.com/watch?v=...&#10;https://www.youtube.com/watch?v=..."></textarea>
+            <br>
+            <div style="margin: 15px 0;">
+                <label style="margin-right: 15px; font-weight: bold; color: #444;">Aspect Ratio / 比例:</label>
+                <label style="margin-right: 10px; cursor: pointer;">
+                    <input type="radio" name="aspectRatio" value="16:9" checked onchange="changeRatio()"> Landscape
+                    (16:9) / 橫向
+                </label>
+                <label style="margin-right: 10px; cursor: pointer;">
+                    <input type="radio" name="aspectRatio" value="9:16" onchange="changeRatio()"> Vertical (9:16) / 直立
+                    (FanCam)
+                </label>
+            </div>
+            <button class="btn" onclick="loadVideos()">Load Videos / 讀取影片</button>
+            <button class="btn" onclick="playAll()">Play All / 同步播放</button>
+            <button class="btn btn-secondary" onclick="pauseAll()">Pause All / 全部暫停</button>
+            <button class="btn btn-secondary" onclick="clearAll()">Clear / 清除</button>
+        </div>
+
+        <div id="multi-grid"></div>
+    </div>
+
+    <script>
+        var players = [];
+        var playerStates = [];
+        var isSyncing = false; // Flag for buffering phase
+
+        // Load YouTube IFrame API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            // API loaded
+        }
+
+        function getVideoId(url) {
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            var match = url.match(regExp);
+            if (match && match[2].length == 11) {
+                return match[2];
+            } else {
+                return null;
+            }
+        }
+
+        function getStartTime(url) {
+            // Regex to match t=X, t=Xs, t=XmYs, etc.
+            var regExp = /[?&]t=([0-9hms]+)/;
+            var match = url.match(regExp);
+            if (match && match[1]) {
+                var timeStr = match[1];
+                if (/^\d+$/.test(timeStr)) {
+                    return parseInt(timeStr);
+                }
+                var seconds = 0;
+                var h = timeStr.match(/(\d+)h/);
+                var m = timeStr.match(/(\d+)m/);
+                var s = timeStr.match(/(\d+)s/);
+                if (h) seconds += parseInt(h[1]) * 3600;
+                if (m) seconds += parseInt(m[1]) * 60;
+                if (s) seconds += parseInt(s[1]);
+                return seconds;
+            }
+            return 0;
+        }
+
+        function loadVideos() {
+            var input = document.getElementById('urlInput').value;
+            var lines = input.split('\n');
+            var grid = document.getElementById('multi-grid');
+
+            grid.innerHTML = '';
+            players = [];
+            playerStates = []; // Reset states
+
+            lines.forEach(function (line, index) {
+                if (!line.trim()) return;
+                var videoId = getVideoId(line.trim());
+                var startTime = getStartTime(line.trim());
+                if (videoId) {
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'player-wrapper';
+                    if (currentRatio === '9:16') {
+                        wrapper.classList.add('ratio-9-16');
+                        grid.classList.add('vertical-mode');
+                    } else {
+                        grid.classList.remove('vertical-mode');
+                    }
+                    var divId = 'player-' + index + '-' + Date.now(); // Unique ID
+                    var div = document.createElement('div');
+                    div.id = divId;
+                    wrapper.appendChild(div);
+                    grid.appendChild(wrapper);
+
+                    // Initialize state
+                    playerStates.push({
+                        id: divId,
+                        ready: false,
+                        startTime: startTime
+                    });
+
+                    var player = new YT.Player(divId, {
+                        height: '100%',
+                        width: '100%',
+                        videoId: videoId,
+                        playerVars: {
+                            'start': startTime,
+                            'playsinline': 1,
+                            'controls': 0, // Option: hide controls for cleaner sync?
+                            'rel': 0
+                        },
+                        events: {
+                            'onStateChange': onPlayerStateChange
+                        }
+                    });
+                    players.push(player);
+                }
+            });
+        }
+
+        function playAll() {
+            if (players.length === 0) return;
+
+            isSyncing = true;
+            document.querySelector("button[onclick='playAll()']").innerText = "Buffering...";
+
+            // Reset readiness
+            playerStates.forEach(s => s.ready = false);
+
+            players.forEach(function (p) {
+                if (p.playVideo) {
+                    p.mute(); // Mute all during buffering
+                    p.playVideo();
+                }
+            });
+        }
+
+        function pauseAll() {
+            isSyncing = false; // Cancel buffering if user pauses
+            document.querySelector("button[onclick='playAll()']").innerText = "Play All / 同步播放";
+            players.forEach(function (p) {
+                if (p.pauseVideo) p.pauseVideo();
+            });
+        }
+
+        var currentRatio = '16:9';
+
+        function changeRatio() {
+            var radios = document.getElementsByName('aspectRatio');
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    currentRatio = radios[i].value;
+                    break;
+                }
+            }
+
+            var grid = document.getElementById('multi-grid');
+            if (currentRatio === '9:16') {
+                grid.classList.add('vertical-mode');
+            } else {
+                grid.classList.remove('vertical-mode');
+            }
+
+            var wrappers = document.getElementsByClassName('player-wrapper');
+            for (var i = 0; i < wrappers.length; i++) {
+                if (currentRatio === '9:16') {
+                    wrappers[i].classList.add('ratio-9-16');
+                } else {
+                    wrappers[i].classList.remove('ratio-9-16');
+                }
+            }
+        }
+        function clearAll() {
+            document.getElementById('multi-grid').innerHTML = '';
+            players = [];
+            playerStates = [];
+            document.getElementById('urlInput').value = '';
+            isSyncing = false;
+            document.querySelector("button[onclick='playAll()']").innerText = "Play All / 同步播放";
+        }
+
+        function onPlayerStateChange(event) {
+            if (isSyncing) {
+                if (event.data === YT.PlayerState.PLAYING) {
+                    // Find which player this is
+                    var playerIndex = players.findIndex(p => p.getIframe().id === event.target.getIframe().id);
+                    if (playerIndex !== -1 && !playerStates[playerIndex].ready) {
+                        event.target.pauseVideo(); // Pause immediately
+                        event.target.seekTo(playerStates[playerIndex].startTime); // Ensure start time
+                        playerStates[playerIndex].ready = true;
+
+                        // Check if all are ready
+                        var allReady = playerStates.every(s => s.ready);
+                        var readyCount = playerStates.filter(s => s.ready).length;
+                        document.querySelector("button[onclick='playAll()']").innerText = `Buffering ${readyCount}/${players.length}...`;
+
+                        if (allReady) {
+                            startSynchronizedPlayback();
+                        }
+                    }
+                }
+            }
+        }
+
+        function startSynchronizedPlayback() {
+            isSyncing = false;
+            document.querySelector("button[onclick='playAll()']").innerText = "Play All / 同步播放";
+
+            players.forEach(function (p, index) {
+                if (index === 0) {
+                    p.unMute(); // Only unmute the first one
+                } else {
+                    p.mute();
+                }
+                p.playVideo();
+            });
+        }
+    </script>
+</body>
+
+</html>

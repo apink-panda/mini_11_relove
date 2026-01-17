@@ -33,6 +33,11 @@
                 data-key="{{ sheet_name }}">
                 {{ sheet_name }}
             </button>
+            {% if sheet_name == 'Winning' %}
+            <button class="tab-button" onclick="openTab(event, 'FanCam')" data-key="FanCam">
+                FanCam
+            </button>
+            {% endif %}
             {% endfor %}
         </div>
 
@@ -40,7 +45,6 @@
             const translations = {{ translations_json | safe }};
         </script>
 
-        <!-- Sort Controls -->
         <div class="sort-controls" style="text-align: right; margin-bottom: 10px;">
             <button id="sortToggle" onclick="toggleSort()"
                 style="padding: 5px 10px; cursor: pointer; font-size: 0.9rem;">📅 ⬇️ Date</button>
@@ -71,6 +75,305 @@
                 </div>
             </section>
             {% endfor %}
+
+            <!-- FanCam Section -->
+            <section id="FanCam" class="sheet-section">
+                <style>
+                    .fancam-member-group {
+                        margin-bottom: 40px;
+                        background: rgba(255, 255, 255, 0.5);
+                        padding: 20px;
+                        border-radius: 15px;
+                    }
+
+                    .fancam-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 15px;
+                    }
+
+                    .fancam-header h2 {
+                        margin: 0;
+                        color: #E85A7E;
+                    }
+
+                    .fancam-controls button {
+                        padding: 8px 16px;
+                        border-radius: 20px;
+                        border: none;
+                        cursor: pointer;
+                        font-weight: bold;
+                        transition: all 0.2s;
+                    }
+
+                    .btn-play {
+                        background-color: var(--primary-pink);
+                        color: white;
+                    }
+
+                    .btn-pause {
+                        background-color: #ddd;
+                        color: #333;
+                    }
+
+                    .btn-fullscreen {
+                        background-color: #333;
+                        color: white;
+                    }
+
+                    /* Horizontal scrolling for mobile, grid for desktop if space permits */
+                    .fancam-grid {
+                        display: flex;
+                        gap: 15px;
+                        overflow-x: auto;
+                        padding-bottom: 10px;
+                    }
+
+                    .fancam-video {
+                        flex: 0 0 200px;
+                        /* Fixed width for vertical video feel */
+                        aspect-ratio: 9/16;
+                        background: #000;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        position: relative;
+                    }
+
+                    :fullscreen .fancam-video {
+                        height: 90vh;
+                        width: auto;
+                    }
+
+                    :fullscreen {
+                        background-color: black;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0 20px;
+                    }
+                </style>
+
+                <div id="fancam-container">
+                    <!-- Javascript will populate this -->
+                </div>
+
+                <script>
+                    var fancamData = [
+                        {
+                            name: "박초롱 初瓏 PARK CHORONG",
+                            videos: [
+                                { id: "EbSmyy7KL84", start: 6 },
+                                { id: "096QzJjs-g8", start: 1 },
+                                { id: "BzQzuvM51WA", start: 1 },
+                                { id: "leqfcEpIXwQ", start: 0.5 },
+                                { id: "peX7fV_-_gY", start: 0.5 }
+                            ]
+                        },
+                        {
+                            name: "윤보미 普美 YOON BOMI",
+                            videos: [
+                                { id: "qIDLxnmjNDM", start: 6 },
+                                { id: "R0UnMc6dPyM", start: 0 },
+                                { id: "1GHH1XSuFUM", start: 2 },
+                                { id: "mm08aufxv38", start: 0 },
+                                { id: "G8SWbbl88zc", start: 1 }
+                            ]
+                        },
+                        {
+                            name: "정은지 恩地 JEONG EUNJI",
+                            videos: [
+                                { id: "Mxb-2XRxMYE", start: 6.5 },
+                                { id: "0cUVxiNjOPM", start: 0.5 },
+                                { id: "lNBohTZluf8", start: 1 },
+                                { id: "iZIroRbWc3A", start: 0 },
+                                { id: "cC8hEHsHfVc", start: 1 }
+                            ]
+                        },
+                        {
+                            name: "김남주 南珠 KIM NAMJOO",
+                            videos: [
+                                { id: "_LT9O3PssIY", start: 6 },
+                                { id: "DPLmunuRi1U", start: 0.5 },
+                                { id: "H6LbfN7KQZs", start: 1 },
+                                { id: "DEzwaxvfI6w", start: 0 },
+                                { id: "F6XQuAUpl4w", start: 1 }
+                            ]
+                        },
+                        {
+                            name: "오하영 夏榮 OH HAYOUNG",
+                            videos: [
+                                { id: "Tfr1v7B3NqA", start: 5.5 },
+                                { id: "3Vs_fjZZxMY", start: 0.5 },
+                                { id: "cZnIn3O2f2M", start: 2 },
+                                { id: "jkiJiH-e4ws", start: 0.5 },
+                                { id: "bCYAZq8XZOM", start: 0.8 }
+                            ]
+                        }
+                    ];
+
+                    var fancamPlayers = {}; // Structure: { memberIndex: [player1, player2, ...] }
+                    var fancamStates = {}; // Structure: { memberIndex: [{ready: false, id: ...}, ...] }
+                    var memberSyncStatus = {}; // { memberIndex: false } (false = not syncing, true = buffering)
+
+                    function initFanCam() {
+                        var container = document.getElementById('fancam-container');
+
+                        fancamData.forEach((member, mIndex) => {
+                            var groupDiv = document.createElement('div');
+                            groupDiv.className = 'fancam-member-group';
+
+                            var header = document.createElement('div');
+                            header.className = 'fancam-header';
+                            header.innerHTML = `
+                                <h2>${member.name}</h2>
+                                <div class="fancam-controls">
+                                    <button class="btn-play" onclick="playMember(${mIndex}, this)">▶ Sync Play</button>
+                                    <button class="btn-pause" onclick="pauseMember(${mIndex}, this)">⏸ Pause</button>
+                                    <button class="btn-fullscreen" onclick="toggleFullscreen(${mIndex})">⛶ Fullscreen</button>
+                                </div>
+                            `;
+                            groupDiv.appendChild(header);
+
+                            var grid = document.createElement('div');
+                            grid.className = 'fancam-grid';
+                            grid.id = `fancam-grid-${mIndex}`;
+
+                            fancamPlayers[mIndex] = [];
+                            fancamStates[mIndex] = [];
+                            memberSyncStatus[mIndex] = false;
+
+                            member.videos.forEach((video, vIndex) => {
+                                var vidDiv = document.createElement('div');
+                                vidDiv.className = 'fancam-video';
+                                var divId = `fancam-p-${mIndex}-${vIndex}`;
+                                var innerDiv = document.createElement('div');
+                                innerDiv.id = divId;
+                                vidDiv.appendChild(innerDiv);
+                                grid.appendChild(vidDiv);
+
+                                // State init
+                                fancamStates[mIndex].push({
+                                    id: divId,
+                                    ready: false,
+                                    startTime: video.start
+                                });
+                            });
+
+                            groupDiv.appendChild(grid);
+                            container.appendChild(groupDiv);
+                        });
+
+                        // Load players after DOM is ready
+                        // Assuming YT API is loaded by main page or we load it here
+                        if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
+                            var tag = document.createElement('script');
+                            tag.src = "https://www.youtube.com/iframe_api";
+                            var firstScriptTag = document.getElementsByTagName('script')[0];
+                            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                            window.onYouTubeIframeAPIReady = function () {
+                                loadFanCamPlayers();
+                            };
+                        } else {
+                            loadFanCamPlayers();
+                        }
+                    }
+
+                    function loadFanCamPlayers() {
+                        fancamData.forEach((member, mIndex) => {
+                            member.videos.forEach((video, vIndex) => {
+                                var divId = `fancam-p-${mIndex}-${vIndex}`;
+                                var player = new YT.Player(divId, {
+                                    videoId: video.id,
+                                    playerVars: {
+                                        'playsinline': 1,
+                                        'controls': 0,
+                                        'rel': 0,
+                                        'start': video.start
+                                    },
+                                    events: {
+                                        'onStateChange': (event) => onFanCamStateChange(event, mIndex, vIndex)
+                                    }
+                                });
+                                fancamPlayers[mIndex].push(player);
+                            });
+                        });
+                    }
+
+                    function onFanCamStateChange(event, mIndex, vIndex) {
+                        if (memberSyncStatus[mIndex]) {
+                            if (event.data === YT.PlayerState.PLAYING) {
+                                // Logic similar to multiview: wait for all to be ready
+                                var state = fancamStates[mIndex][vIndex];
+                                if (!state.ready) {
+                                    event.target.pauseVideo();
+                                    event.target.seekTo(state.startTime);
+                                    state.ready = true;
+
+                                    var allReady = fancamStates[mIndex].every(s => s.ready);
+                                    var btn = document.querySelector(`button[onclick="playMember(${mIndex}, this)"]`);
+                                    var readyCount = fancamStates[mIndex].filter(s => s.ready).length;
+                                    var total = fancamStates[mIndex].length;
+                                    if (btn) btn.innerHTML = `Buffering ${readyCount}/${total}...`;
+
+                                    if (allReady) {
+                                        startMemberPlayback(mIndex);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    function playMember(mIndex, btn) {
+                        memberSyncStatus[mIndex] = true;
+                        if (btn) btn.innerHTML = "Buffering...";
+
+                        // Reset ready states
+                        fancamStates[mIndex].forEach(s => s.ready = false);
+
+                        fancamPlayers[mIndex].forEach(p => {
+                            p.mute();
+                            p.playVideo();
+                        });
+                    }
+
+                    function startMemberPlayback(mIndex) {
+                        memberSyncStatus[mIndex] = false;
+                        var btn = document.querySelector(`button[onclick="playMember(${mIndex}, this)"]`);
+                        if (btn) btn.innerHTML = "▶ Sync Play";
+
+                        fancamPlayers[mIndex].forEach((p, i) => {
+                            if (i === 0) p.unMute();
+                            else p.mute();
+                            p.playVideo();
+                        });
+                    }
+
+                    function pauseMember(mIndex, btn) {
+                        memberSyncStatus[mIndex] = false;
+                        var playBtn = document.querySelector(`button[onclick="playMember(${mIndex}, this)"]`);
+                        if (playBtn) playBtn.innerHTML = "▶ Sync Play";
+
+                        fancamPlayers[mIndex].forEach(p => {
+                            p.pauseVideo();
+                        });
+                    }
+
+                    function toggleFullscreen(mIndex) {
+                        var elem = document.getElementById(`fancam-grid-${mIndex}`);
+                        if (!document.fullscreenElement) {
+                            elem.requestFullscreen().catch(err => {
+                                alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+                            });
+                        } else {
+                            document.exitFullscreen();
+                        }
+                    }
+
+                    // Init on load
+                    document.addEventListener('DOMContentLoaded', initFanCam);
+                </script>
+            </section>
         </main>
     </div>
 

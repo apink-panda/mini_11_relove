@@ -40,7 +40,8 @@ TRANSLATIONS = {
         '經典歌曲': {'TC': '經典歌曲', 'KR': '명곡', 'EN': 'Classic Songs', 'JP': '名曲'},
         '訪問': {'TC': '訪問', 'KR': '인터뷰/예능', 'EN': 'Interview', 'JP': 'インタビュー'},
         '應援': {'TC': '應援', 'KR': '응원법', 'EN': 'Fanchant', 'JP': '応援'},
-        'Apink Diary': {'TC': 'Apink Diary', 'KR': 'Apink Diary', 'EN': 'Apink Diary', 'JP': 'Apink Diary'}
+        'Apink Diary': {'TC': 'Apink Diary', 'KR': 'Apink Diary', 'EN': 'Apink Diary', 'JP': 'Apink Diary'},
+        'FanCam': {'TC': 'FanCam', 'KR': '직캠', 'EN': 'FanCam', 'JP': 'ファンカム'}
     },
     'last_updated_label': {
         'TC': '最後更新時間',
@@ -500,6 +501,15 @@ def build_site():
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_output)
     print("Site generated successfully: index.html")
+
+    multiview_template = env.get_template('multiview.html')
+    multiview_html = multiview_template.render(
+        site_title=TRANSLATIONS['site_title']['TC'],
+        version=version_timestamp
+    )
+    with open('multiview.html', 'w', encoding='utf-8') as f:
+        f.write(multiview_html)
+    print("Site generated successfully: multiview.html")
 
 if __name__ == "__main__":
     build_site()
