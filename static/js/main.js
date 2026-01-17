@@ -84,6 +84,11 @@ window.changeLanguage = function (lang) {
         }
     });
 
+    // Update FanCam buttons if they exist
+    if (window.updateFanCamButtons) {
+        window.updateFanCamButtons();
+    }
+
     // Save preference
     localStorage.setItem('preferredLanguage', lang);
 }

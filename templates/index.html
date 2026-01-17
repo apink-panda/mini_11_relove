@@ -107,12 +107,12 @@
                         transition: all 0.2s;
                     }
 
-                    .btn-play {
+                    .btn-toggle-play {
                         background-color: var(--primary-pink);
                         color: white;
                     }
 
-                    .btn-pause {
+                    .btn-toggle-play.paused {
                         background-color: #ddd;
                         color: #333;
                     }
@@ -200,6 +200,43 @@
                     var fancamStates = {}; // Structure: { memberIndex: [{ready: false, id: ...}, ...] }
                     var memberSyncStatus = {}; // { memberIndex: false } (false = not syncing, true = buffering)
 
+                    function getTranslation(key) {
+                        const lang = localStorage.getItem('preferredLanguage') || 'TC';
+                        return translations[key] ? translations[key][lang] : key;
+                    }
+
+                    function updateFanCamButtons() {
+                        fancamData.forEach((member, mIndex) => {
+                            updateMemberButton(mIndex);
+                        });
+                    }
+
+                    function updateMemberButton(mIndex, btn) {
+                        if (!btn) {
+                            btn = document.querySelector(`button[onclick="togglePlayMember(${mIndex}, this)"]`);
+                        }
+                        if (!btn) return;
+
+                        if (memberSyncStatus[mIndex]) {
+                            var readyCount = fancamStates[mIndex].filter(s => s.ready).length;
+                            var total = fancamStates[mIndex].length;
+                            var bufferingText = getTranslation('buffering');
+                            btn.innerHTML = `${bufferingText} ${readyCount}/${total}...`;
+                            btn.disabled = true;
+                        } else if (memberPlaybackState[mIndex]) {
+                            btn.innerHTML = "⏸ " + getTranslation('pause');
+                            btn.classList.add('paused');
+                            btn.disabled = false;
+                        } else {
+                            btn.innerHTML = "▶ " + getTranslation('sync_play');
+                            btn.classList.remove('paused');
+                            btn.disabled = false;
+                        }
+                    }
+
+                    // Expose to global for main.js to call
+                    window.updateFanCamButtons = updateFanCamButtons;
+
                     function initFanCam() {
                         var container = document.getElementById('fancam-container');
 
@@ -212,8 +249,7 @@
                             header.innerHTML = `
                                 <h2>${member.name}</h2>
                                 <div class="fancam-controls">
-                                    <button class="btn-play" onclick="playMember(${mIndex}, this)">▶ Sync Play</button>
-                                    <button class="btn-pause" onclick="pauseMember(${mIndex}, this)">⏸ Pause</button>
+                                    <button class="btn-toggle-play" onclick="togglePlayMember(${mIndex}, this)">▶ ${getTranslation('sync_play')}</button>
                                 </div>
                             `;
                             groupDiv.appendChild(header);
@@ -294,10 +330,7 @@
                                     state.ready = true;
 
                                     var allReady = fancamStates[mIndex].every(s => s.ready);
-                                    var btn = document.querySelector(`button[onclick="playMember(${mIndex}, this)"]`);
-                                    var readyCount = fancamStates[mIndex].filter(s => s.ready).length;
-                                    var total = fancamStates[mIndex].length;
-                                    if (btn) btn.innerHTML = `Buffering ${readyCount}/${total}...`;
+                                    updateMemberButton(mIndex);
 
                                     if (allReady) {
                                         startMemberPlayback(mIndex);
@@ -307,9 +340,19 @@
                         }
                     }
 
+                    var memberPlaybackState = {}; // { memberIndex: boolean } (true = playing, false = paused/stopped)
+
+                    function togglePlayMember(mIndex, btn) {
+                        if (memberPlaybackState[mIndex]) {
+                            pauseMember(mIndex, btn);
+                        } else {
+                            playMember(mIndex, btn);
+                        }
+                    }
+
                     function playMember(mIndex, btn) {
                         memberSyncStatus[mIndex] = true;
-                        if (btn) btn.innerHTML = "Buffering...";
+                        updateMemberButton(mIndex, btn);
 
                         // Reset ready states
                         fancamStates[mIndex].forEach(s => s.ready = false);
@@ -322,8 +365,8 @@
 
                     function startMemberPlayback(mIndex) {
                         memberSyncStatus[mIndex] = false;
-                        var btn = document.querySelector(`button[onclick="playMember(${mIndex}, this)"]`);
-                        if (btn) btn.innerHTML = "▶ Sync Play";
+                        memberPlaybackState[mIndex] = true;
+                        updateMemberButton(mIndex);
 
                         fancamPlayers[mIndex].forEach((p, i) => {
                             if (i === 0) p.unMute();
@@ -334,8 +377,8 @@
 
                     function pauseMember(mIndex, btn) {
                         memberSyncStatus[mIndex] = false;
-                        var playBtn = document.querySelector(`button[onclick="playMember(${mIndex}, this)"]`);
-                        if (playBtn) playBtn.innerHTML = "▶ Sync Play";
+                        memberPlaybackState[mIndex] = false;
+                        updateMemberButton(mIndex, btn);
 
                         fancamPlayers[mIndex].forEach(p => {
                             p.pauseVideo();

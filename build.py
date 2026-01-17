@@ -324,6 +324,24 @@ TRANSLATIONS = {
         'KR': '1위',
         'EN': '1st Win',
         'JP': '1位獲得'
+    },
+    'sync_play': {
+        'TC': '同時播放',
+        'KR': '동시 재생',
+        'EN': 'Sync Play',
+        'JP': '同時再生'
+    },
+    'pause': {
+        'TC': '暫停',
+        'KR': '일시정지',
+        'EN': 'Pause',
+        'JP': '一時停止'
+    },
+    'buffering': {
+        'TC': '緩衝中...',
+        'KR': '버퍼링...',
+        'EN': 'Buffering...',
+        'JP': 'バッファリング...'
     }
 }
 
