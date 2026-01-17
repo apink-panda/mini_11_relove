@@ -357,8 +357,9 @@
                         // Reset ready states
                         fancamStates[mIndex].forEach(s => s.ready = false);
 
-                        fancamPlayers[mIndex].forEach(p => {
+                        fancamPlayers[mIndex].forEach((p, i) => {
                             p.mute();
+                            p.seekTo(fancamStates[mIndex][i].startTime);
                             p.playVideo();
                         });
                     }
