@@ -510,6 +510,7 @@ def build_site():
     about_template = env.get_template('about.html')
     about_html = about_template.render(
         site_title=TRANSLATIONS['site_title']['TC'],
+        translations_json=json.dumps(TRANSLATIONS),
         version=version_timestamp
     )
     with open('about.html', 'w', encoding='utf-8') as f:
@@ -523,6 +524,7 @@ def build_site():
     multiview_template = env.get_template('multiview.html')
     multiview_html = multiview_template.render(
         site_title=TRANSLATIONS['site_title']['TC'],
+        translations_json=json.dumps(TRANSLATIONS),
         version=version_timestamp
     )
     with open('multiview.html', 'w', encoding='utf-8') as f:
