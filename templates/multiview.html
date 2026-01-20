@@ -138,8 +138,10 @@
                 </label>
             </div>
             <button class="btn" onclick="loadVideos()">Load Videos / 讀取影片</button>
-            <button class="btn" onclick="playAll()">Play All / 同步播放</button>
-            <button class="btn btn-secondary" onclick="pauseAll()">Pause All / 全部暫停</button>
+            <button class="btn" onclick="playAll()" id="playBtn">▶️ Play All / 同步播放</button>
+            <button class="btn" onclick="togglePause()" id="pauseBtn" style="display:none;">⏸️ Pause / 暫停</button>
+            <button class="btn btn-secondary" onclick="restartAll()" id="restartBtn" style="display:none;">🔄 Restart /
+                重新開始</button>
             <button class="btn btn-secondary" onclick="clearAll()">Clear / 清除</button>
         </div>
 
@@ -192,6 +194,8 @@
             return 0;
         }
 
+        var videoDataList = []; // Store video info for lazy loading
+
         function loadVideos() {
             var input = document.getElementById('urlInput').value;
             var lines = input.split('\n');
@@ -199,7 +203,8 @@
 
             grid.innerHTML = '';
             players = [];
-            playerStates = []; // Reset states
+            playerStates = [];
+            videoDataList = [];
 
             lines.forEach(function (line, index) {
                 if (!line.trim()) return;
@@ -214,43 +219,81 @@
                     } else {
                         grid.classList.remove('vertical-mode');
                     }
-                    var divId = 'player-' + index + '-' + Date.now(); // Unique ID
-                    var div = document.createElement('div');
-                    div.id = divId;
-                    wrapper.appendChild(div);
+                    var divId = 'player-' + index + '-' + Date.now();
+
+                    // Create thumbnail container instead of iframe
+                    var thumbnailDiv = document.createElement('div');
+                    thumbnailDiv.id = divId;
+                    thumbnailDiv.className = 'thumbnail-container';
+                    thumbnailDiv.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;';
+                    thumbnailDiv.style.backgroundImage = 'url(https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg)';
+
+                    wrapper.appendChild(thumbnailDiv);
                     grid.appendChild(wrapper);
 
-                    // Initialize state
+                    // Store video data for later
+                    videoDataList.push({
+                        id: divId,
+                        videoId: videoId,
+                        startTime: startTime
+                    });
+
                     playerStates.push({
                         id: divId,
                         ready: false,
                         startTime: startTime
                     });
-
-                    var player = new YT.Player(divId, {
-                        height: '100%',
-                        width: '100%',
-                        videoId: videoId,
-                        playerVars: {
-                            'start': startTime,
-                            'playsinline': 1,
-                            'controls': 0, // Option: hide controls for cleaner sync?
-                            'rel': 0
-                        },
-                        events: {
-                            'onStateChange': onPlayerStateChange
-                        }
-                    });
-                    players.push(player);
                 }
             });
         }
 
-        function playAll() {
-            if (players.length === 0) return;
+        function createPlayers() {
+            // Create actual YouTube players from thumbnails
+            videoDataList.forEach(function (data, index) {
+                var player = new YT.Player(data.id, {
+                    height: '100%',
+                    width: '100%',
+                    videoId: data.videoId,
+                    playerVars: {
+                        'start': data.startTime,
+                        'playsinline': 1,
+                        'controls': 0,
+                        'rel': 0,
+                        'modestbranding': 1,
+                        'showinfo': 0,
+                        'iv_load_policy': 3
+                    },
+                    events: {
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+                players.push(player);
+            });
+        }
 
+        var isPaused = false;
+
+        function playAll() {
+            if (videoDataList.length === 0) return;
+
+            // If players not created yet, create them first
+            if (players.length === 0) {
+                createPlayers();
+                // Wait for players to be ready before starting sync
+                setTimeout(startBuffering, 1000);
+            } else {
+                startBuffering();
+            }
+        }
+
+        function startBuffering() {
             isSyncing = true;
-            document.querySelector("button[onclick='playAll()']").innerText = "Buffering...";
+            isPaused = false;
+            document.getElementById('playBtn').style.display = 'none';
+            document.getElementById('pauseBtn').style.display = 'inline-block';
+            document.getElementById('pauseBtn').innerText = '⏳ Buffering...';
+            document.getElementById('pauseBtn').disabled = true;
+            document.getElementById('restartBtn').style.display = 'inline-block';
 
             // Reset readiness
             playerStates.forEach(s => s.ready = false);
@@ -263,11 +306,55 @@
             });
         }
 
-        function pauseAll() {
-            isSyncing = false; // Cancel buffering if user pauses
-            document.querySelector("button[onclick='playAll()']").innerText = "Play All / 同步播放";
+        function togglePause() {
+            if (players.length === 0) return;
+
+            var pauseBtn = document.getElementById('pauseBtn');
+
+            if (isPaused) {
+                // Resume playback
+                players.forEach(function (p, index) {
+                    if (index === 0) {
+                        p.unMute();
+                    }
+                    p.playVideo();
+                });
+                isPaused = false;
+                pauseBtn.innerText = '⏸️ Pause / 暫停';
+            } else {
+                // Pause playback
+                players.forEach(function (p) {
+                    if (p.pauseVideo) p.pauseVideo();
+                });
+                isPaused = true;
+                pauseBtn.innerText = '▶️ Resume / 繼續';
+            }
+        }
+
+        function restartAll() {
+            if (players.length === 0) return;
+
+            // Seek all players to their start time
+            players.forEach(function (p, index) {
+                if (p.seekTo) {
+                    p.seekTo(playerStates[index].startTime);
+                }
+            });
+
+            // Reset and start synchronized playback
+            isPaused = false;
+            isSyncing = true;
+            document.getElementById('pauseBtn').innerText = '⏳ Buffering...';
+            document.getElementById('pauseBtn').disabled = true;
+
+            // Reset readiness
+            playerStates.forEach(s => s.ready = false);
+
             players.forEach(function (p) {
-                if (p.pauseVideo) p.pauseVideo();
+                if (p.playVideo) {
+                    p.mute();
+                    p.playVideo();
+                }
             });
         }
 
@@ -302,9 +389,13 @@
             document.getElementById('multi-grid').innerHTML = '';
             players = [];
             playerStates = [];
+            videoDataList = [];
             document.getElementById('urlInput').value = '';
             isSyncing = false;
-            document.querySelector("button[onclick='playAll()']").innerText = "Play All / 同步播放";
+            isPaused = false;
+            document.getElementById('playBtn').style.display = 'inline-block';
+            document.getElementById('pauseBtn').style.display = 'none';
+            document.getElementById('restartBtn').style.display = 'none';
         }
 
         function onPlayerStateChange(event) {
@@ -320,7 +411,7 @@
                         // Check if all are ready
                         var allReady = playerStates.every(s => s.ready);
                         var readyCount = playerStates.filter(s => s.ready).length;
-                        document.querySelector("button[onclick='playAll()']").innerText = `Buffering ${readyCount}/${players.length}...`;
+                        document.getElementById('pauseBtn').innerText = `⏳ Buffering ${readyCount}/${players.length}...`;
 
                         if (allReady) {
                             startSynchronizedPlayback();
@@ -332,7 +423,8 @@
 
         function startSynchronizedPlayback() {
             isSyncing = false;
-            document.querySelector("button[onclick='playAll()']").innerText = "Play All / 同步播放";
+            document.getElementById('pauseBtn').innerText = '⏸️ Pause / 暫停';
+            document.getElementById('pauseBtn').disabled = false;
 
             players.forEach(function (p, index) {
                 if (index === 0) {
