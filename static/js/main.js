@@ -1,4 +1,7 @@
+let currentVideoId = null;
+
 function openVideo(videoId) {
+    currentVideoId = videoId;
     const modal = document.getElementById("videoModal");
     const container = document.getElementById("playerContainer");
 
@@ -22,7 +25,81 @@ function closeVideo() {
 
     modal.style.display = "none";
     container.innerHTML = ''; // Stop video playback
+    currentVideoId = null;
 }
+
+// Fallback function for older devices or non-secure contexts (http)
+function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        var successful = document.execCommand('copy');
+        if (successful) {
+            showCopyFeedback();
+        } else {
+            console.error('Fallback: unable to copy');
+            alert('Copy failed. Please copy the URL manually: ' + text);
+        }
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+        alert('Copy failed. Please copy the URL manually: ' + text);
+    }
+
+    document.body.removeChild(textArea);
+}
+
+function showCopyFeedback() {
+    const btn = document.querySelector('.copy-url-btn');
+    if (!btn) return;
+
+    const lang = localStorage.getItem('preferredLanguage') || 'TC';
+
+    // Show feedback
+    const copiedText = (typeof translations !== 'undefined' && translations['url_copied'])
+        ? translations['url_copied'][lang]
+        : 'Copied!';
+
+    const originalHtml = btn.innerHTML; // Save icon
+    btn.textContent = `✅ ${copiedText}`;
+
+    // Restore after 2 seconds
+    setTimeout(() => {
+        const originalText = (typeof translations !== 'undefined' && translations['copy_url'])
+            ? translations['copy_url'][lang]
+            : 'Copy Link';
+        btn.textContent = `🔗 ${originalText}`;
+    }, 2000);
+}
+
+function copyCurrentVideoUrl() {
+    if (!currentVideoId) return;
+    const url = `https://www.youtube.com/watch?v=${currentVideoId}`;
+
+    if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(url);
+        return;
+    }
+
+    // Try API first
+    navigator.clipboard.writeText(url).then(() => {
+        showCopyFeedback();
+    }).catch(err => {
+        console.error('Async: Could not copy text: ', err);
+        // Fallback if async fails
+        fallbackCopyTextToClipboard(url);
+    });
+}
+
 
 // Close modal when clicking outside
 window.onclick = function (event) {

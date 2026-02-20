@@ -342,6 +342,18 @@ TRANSLATIONS = {
         'KR': '버퍼링...',
         'EN': 'Buffering...',
         'JP': 'バッファリング...'
+    },
+    'copy_url': {
+        'TC': '複製連結',
+        'KR': '링크 복사',
+        'EN': 'Copy Link',
+        'JP': 'リンクをコピー'
+    },
+    'url_copied': {
+        'TC': '已複製！',
+        'KR': '복사됨!',
+        'EN': 'Copied!',
+        'JP': 'コピーしました！'
     }
 }
 

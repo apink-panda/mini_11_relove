@@ -180,14 +180,46 @@ h2 {
     border-radius: 8px;
 }
 
-.close {
+.modal-controls {
     position: absolute;
     top: -40px;
     right: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.copy-url-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(5px);
+}
+
+.copy-url-btn:hover {
+    background-color: var(--primary-pink);
+    border-color: var(--primary-pink);
+    transform: translateY(-2px);
+}
+
+.close {
+    /* Position is handled by flexpad parent now */
+    /* position: absolute; */
+    /* top: -40px; */
+    /* right: 0; */
     color: #f1f1f1;
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
+    line-height: 1; /* Fix vertical alignment */
 }
 
 .close:hover,

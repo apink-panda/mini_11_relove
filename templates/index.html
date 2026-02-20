@@ -399,7 +399,10 @@
     <!-- Video Modal -->
     <div id="videoModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeVideo()">&times;</span>
+            <div class="modal-controls">
+                <button class="copy-url-btn" onclick="copyCurrentVideoUrl()" data-key="copy_url">🔗 複製連結</button>
+                <span class="close" onclick="closeVideo()">&times;</span>
+            </div>
             <div id="playerContainer"></div>
         </div>
     </div>
